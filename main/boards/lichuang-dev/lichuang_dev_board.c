@@ -8,6 +8,7 @@
 #include "backlight.h"
 #include "i2c_device.h"
 #include "device_state.h"
+#include "led/led.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -20,6 +21,7 @@
 #include <esp_lcd_io_i2c.h>
 #include <esp_lcd_touch_ft5x06.h>
 #include <esp_lvgl_port.h>
+#include <es8311_codec.h>
 #include <lvgl.h>
 #include "c_api/board_c_api.h"
 

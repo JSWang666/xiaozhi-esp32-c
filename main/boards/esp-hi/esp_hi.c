@@ -23,9 +23,24 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <esp_timer.h>
+#include <cJSON.h>
 
 #include "esp_lcd_ili9341.h"
 #include "sdkconfig.h"
+
+static int eh_arg_int(const cJSON *args, const char *name, int dflt)
+{
+    const cJSON *item = cJSON_GetObjectItemCaseSensitive(args, name);
+    if (!cJSON_IsNumber(item)) return dflt;
+    return item->valueint;
+}
+
+static const char *eh_arg_string(const cJSON *args, const char *name)
+{
+    const cJSON *item = cJSON_GetObjectItemCaseSensitive(args, name);
+    if (!cJSON_IsString(item)) return "";
+    return item->valuestring ? item->valuestring : "";
+}
 
 #ifdef CONFIG_ESP_CONSOLE_NONE
 #include "servo_dog_ctrl.h"
@@ -322,10 +337,10 @@ static mcp_tool_result_t light_turn_off(const void *args, void *ud)
 static mcp_tool_result_t light_set_rgb(const void *args, void *ud)
 {
     esp_hi_ctx_t *ctx = (esp_hi_ctx_t *)ud;
-    const mcp_property_list_t *props = (const mcp_property_list_t *)args;
-    int r = mcp_property_get_int(props, "r");
-    int g = mcp_property_get_int(props, "g");
-    int b = mcp_property_get_int(props, "b");
+    const cJSON *props = (const cJSON *)args;
+    int r = eh_arg_int(props, "r", 0);
+    int g = eh_arg_int(props, "g", 0);
+    int b = eh_arg_int(props, "b", 0);
     set_led_color(ctx, (uint8_t)r, (uint8_t)g, (uint8_t)b);
     ctx->led_on = true;
     mcp_tool_result_t res = { .is_error = false, .text = NULL };
@@ -335,8 +350,8 @@ static mcp_tool_result_t light_set_rgb(const void *args, void *ud)
 #ifdef CONFIG_ESP_CONSOLE_NONE
 static mcp_tool_result_t dog_basic_control(const void *args, void *ud)
 {
-    const mcp_property_list_t *props = (const mcp_property_list_t *)args;
-    const char *action = mcp_property_get_string(props, "action");
+    const cJSON *props = (const cJSON *)args;
+    const char *action = eh_arg_string(props, "action");
     mcp_tool_result_t res = { .is_error = false, .text = NULL };
 
     if (strcmp(action, "forward") == 0) {
@@ -358,8 +373,8 @@ static mcp_tool_result_t dog_basic_control(const void *args, void *ud)
 
 static mcp_tool_result_t dog_advanced_control(const void *args, void *ud)
 {
-    const mcp_property_list_t *props = (const mcp_property_list_t *)args;
-    const char *action = mcp_property_get_string(props, "action");
+    const cJSON *props = (const cJSON *)args;
+    const char *action = eh_arg_string(props, "action");
     mcp_tool_result_t res = { .is_error = false, .text = NULL };
 
     if (strcmp(action, "sway_back_forth") == 0) {
@@ -391,16 +406,16 @@ static void init_tools(esp_hi_ctx_t *ctx)
     if (!mcp) return;
 
 #ifdef CONFIG_ESP_CONSOLE_NONE
-    mcp_property_desc_t basic_props[] = {
-        { .name = "action", .type = MCP_PROPERTY_TYPE_STRING },
+    mcp_tool_param_t basic_props[] = {
+        { .name = "action", .type = MCP_PARAM_TYPE_STRING },
     };
     mcp_server_add_tool_c(mcp, "self.dog.basic_control",
         "\xe6\x9c\xba\xe5\x99\xa8\xe4\xba\xba\xe7\x9a\x84\xe5\x9f\xba\xe7\xa1\x80\xe5\x8a\xa8\xe4\xbd\x9c\xe3\x80\x82"
         "forward/backward/turn_left/turn_right/stop",
         basic_props, 1, dog_basic_control, ctx);
 
-    mcp_property_desc_t adv_props[] = {
-        { .name = "action", .type = MCP_PROPERTY_TYPE_STRING },
+    mcp_tool_param_t adv_props[] = {
+        { .name = "action", .type = MCP_PARAM_TYPE_STRING },
     };
     mcp_server_add_tool_c(mcp, "self.dog.advanced_control",
         "\xe6\x9c\xba\xe5\x99\xa8\xe4\xba\xba\xe7\x9a\x84\xe6\x89\xa9\xe5\xb1\x95\xe5\x8a\xa8\xe4\xbd\x9c\xe3\x80\x82"
@@ -415,10 +430,10 @@ static void init_tools(esp_hi_ctx_t *ctx)
     mcp_server_add_tool_c(mcp, "self.light.turn_off",
         "Turn off light", NULL, 0, light_turn_off, ctx);
 
-    mcp_property_desc_t rgb_props[] = {
-        { .name = "r", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "g", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "b", .type = MCP_PROPERTY_TYPE_INTEGER },
+    mcp_tool_param_t rgb_props[] = {
+        { .name = "r", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "g", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "b", .type = MCP_PARAM_TYPE_INTEGER },
     };
     mcp_server_add_tool_c(mcp, "self.light.set_rgb",
         "Set RGB color", rgb_props, 3, light_set_rgb, ctx);

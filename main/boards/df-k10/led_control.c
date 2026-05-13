@@ -5,6 +5,7 @@
 #include <driver/rmt_tx.h>
 #include <string.h>
 #include <stdlib.h>
+#include <cJSON.h>
 
 #include "config.h"
 
@@ -17,6 +18,13 @@ typedef struct {
 } k10_led_ctx_t;
 
 static k10_led_ctx_t *g_led_ctx = NULL;
+
+static int mcp_arg_int(const cJSON *args, const char *name, int dflt)
+{
+    const cJSON *item = cJSON_GetObjectItemCaseSensitive(args, name);
+    if (!cJSON_IsNumber(item)) return dflt;
+    return item->valueint;
+}
 
 static int level_to_brightness(int level)
 {
@@ -47,8 +55,8 @@ static mcp_tool_result_t led_get_brightness(const void *args, void *ud)
 static mcp_tool_result_t led_set_brightness(const void *args, void *ud)
 {
     k10_led_ctx_t *ctx = (k10_led_ctx_t *)ud;
-    const mcp_property_list_t *props = (const mcp_property_list_t *)args;
-    int level = mcp_property_get_int(props, "level");
+    const cJSON *props = (const cJSON *)args;
+    int level = mcp_arg_int(props, "level", 0);
     if (level < 0) level = 0;
     if (level > 8) level = 8;
     ctx->brightness_level = level;
@@ -60,11 +68,11 @@ static mcp_tool_result_t led_set_brightness(const void *args, void *ud)
 static mcp_tool_result_t led_set_single_color(const void *args, void *ud)
 {
     k10_led_ctx_t *ctx = (k10_led_ctx_t *)ud;
-    const mcp_property_list_t *props = (const mcp_property_list_t *)args;
-    int index = mcp_property_get_int(props, "index");
-    int red = mcp_property_get_int(props, "red");
-    int green = mcp_property_get_int(props, "green");
-    int blue = mcp_property_get_int(props, "blue");
+    const cJSON *props = (const cJSON *)args;
+    int index = mcp_arg_int(props, "index", 0);
+    int red = mcp_arg_int(props, "red", 0);
+    int green = mcp_arg_int(props, "green", 0);
+    int blue = mcp_arg_int(props, "blue", 0);
     if (index >= 0 && index < K10_LED_COUNT) {
         apply_color(ctx, index, (uint8_t)red, (uint8_t)green, (uint8_t)blue);
         led_strip_refresh(ctx->strip);
@@ -76,10 +84,10 @@ static mcp_tool_result_t led_set_single_color(const void *args, void *ud)
 static mcp_tool_result_t led_set_all_color(const void *args, void *ud)
 {
     k10_led_ctx_t *ctx = (k10_led_ctx_t *)ud;
-    const mcp_property_list_t *props = (const mcp_property_list_t *)args;
-    int red = mcp_property_get_int(props, "red");
-    int green = mcp_property_get_int(props, "green");
-    int blue = mcp_property_get_int(props, "blue");
+    const cJSON *props = (const cJSON *)args;
+    int red = mcp_arg_int(props, "red", 0);
+    int green = mcp_arg_int(props, "green", 0);
+    int blue = mcp_arg_int(props, "blue", 0);
     for (int i = 0; i < K10_LED_COUNT; i++)
         apply_color(ctx, i, (uint8_t)red, (uint8_t)green, (uint8_t)blue);
     led_strip_refresh(ctx->strip);
@@ -90,10 +98,10 @@ static mcp_tool_result_t led_set_all_color(const void *args, void *ud)
 static mcp_tool_result_t led_blink(const void *args, void *ud)
 {
     k10_led_ctx_t *ctx = (k10_led_ctx_t *)ud;
-    const mcp_property_list_t *props = (const mcp_property_list_t *)args;
-    int red = mcp_property_get_int(props, "red");
-    int green = mcp_property_get_int(props, "green");
-    int blue = mcp_property_get_int(props, "blue");
+    const cJSON *props = (const cJSON *)args;
+    int red = mcp_arg_int(props, "red", 0);
+    int green = mcp_arg_int(props, "green", 0);
+    int blue = mcp_arg_int(props, "blue", 0);
     for (int i = 0; i < K10_LED_COUNT; i++)
         apply_color(ctx, i, (uint8_t)red, (uint8_t)green, (uint8_t)blue);
     led_strip_refresh(ctx->strip);
@@ -104,10 +112,10 @@ static mcp_tool_result_t led_blink(const void *args, void *ud)
 static mcp_tool_result_t led_scroll(const void *args, void *ud)
 {
     k10_led_ctx_t *ctx = (k10_led_ctx_t *)ud;
-    const mcp_property_list_t *props = (const mcp_property_list_t *)args;
-    int red = mcp_property_get_int(props, "red");
-    int green = mcp_property_get_int(props, "green");
-    int blue = mcp_property_get_int(props, "blue");
+    const cJSON *props = (const cJSON *)args;
+    int red = mcp_arg_int(props, "red", 0);
+    int green = mcp_arg_int(props, "green", 0);
+    int blue = mcp_arg_int(props, "blue", 0);
     for (int i = 0; i < K10_LED_COUNT; i++)
         apply_color(ctx, i, (uint8_t)red, (uint8_t)green, (uint8_t)blue);
     led_strip_refresh(ctx->strip);
@@ -142,44 +150,44 @@ led_strip_handle_t k10_led_control_init(void)
     mcp_server_add_tool_c(mcp, "self.led_strip.get_brightness",
         "Get LED strip brightness (0-8)", NULL, 0, led_get_brightness, ctx);
 
-    mcp_property_desc_t br_props[] = {
-        { .name = "level", .type = MCP_PROPERTY_TYPE_INTEGER },
+    mcp_tool_param_t br_props[] = {
+        { .name = "level", .type = MCP_PARAM_TYPE_INTEGER },
     };
     mcp_server_add_tool_c(mcp, "self.led_strip.set_brightness",
         "Set LED strip brightness (0-8)", br_props, 1, led_set_brightness, ctx);
 
-    mcp_property_desc_t single_props[] = {
-        { .name = "index", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "red", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "green", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "blue", .type = MCP_PROPERTY_TYPE_INTEGER },
+    mcp_tool_param_t single_props[] = {
+        { .name = "index", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "red", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "green", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "blue", .type = MCP_PARAM_TYPE_INTEGER },
     };
     mcp_server_add_tool_c(mcp, "self.led_strip.set_single_color",
         "Set single LED color", single_props, 4, led_set_single_color, ctx);
 
-    mcp_property_desc_t all_props[] = {
-        { .name = "red", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "green", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "blue", .type = MCP_PROPERTY_TYPE_INTEGER },
+    mcp_tool_param_t all_props[] = {
+        { .name = "red", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "green", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "blue", .type = MCP_PARAM_TYPE_INTEGER },
     };
     mcp_server_add_tool_c(mcp, "self.led_strip.set_all_color",
         "Set all LEDs color", all_props, 3, led_set_all_color, ctx);
 
-    mcp_property_desc_t blink_props[] = {
-        { .name = "red", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "green", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "blue", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "interval", .type = MCP_PROPERTY_TYPE_INTEGER },
+    mcp_tool_param_t blink_props[] = {
+        { .name = "red", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "green", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "blue", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "interval", .type = MCP_PARAM_TYPE_INTEGER },
     };
     mcp_server_add_tool_c(mcp, "self.led_strip.blink",
         "Blink LED strip", blink_props, 4, led_blink, ctx);
 
-    mcp_property_desc_t scroll_props[] = {
-        { .name = "red", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "green", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "blue", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "length", .type = MCP_PROPERTY_TYPE_INTEGER },
-        { .name = "interval", .type = MCP_PROPERTY_TYPE_INTEGER },
+    mcp_tool_param_t scroll_props[] = {
+        { .name = "red", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "green", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "blue", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "length", .type = MCP_PARAM_TYPE_INTEGER },
+        { .name = "interval", .type = MCP_PARAM_TYPE_INTEGER },
     };
     mcp_server_add_tool_c(mcp, "self.led_strip.scroll",
         "Scroll LED strip", scroll_props, 5, led_scroll, ctx);

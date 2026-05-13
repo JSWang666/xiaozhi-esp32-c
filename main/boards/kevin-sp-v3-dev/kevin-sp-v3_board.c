@@ -166,7 +166,8 @@ board_desc_t *create_board_desc(void)
     ctx->display = init_display();
     init_camera();
 
-    board_btn_handle_t boot_btn = board_btn_create_gpio(BOOT_BUTTON_GPIO);
+    board_btn_gpio_cfg_t boot_cfg = { .gpio_num = BOOT_BUTTON_GPIO };
+    board_btn_t *boot_btn = board_btn_create_gpio(&boot_cfg);
     board_btn_on_click(boot_btn, on_boot_click, NULL);
     board_btn_on_press_down(boot_btn, on_boot_press_down, NULL);
     board_btn_on_press_up(boot_btn, on_boot_press_up, NULL);
