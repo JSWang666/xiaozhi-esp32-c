@@ -12,6 +12,7 @@
 #include <driver/spi_master.h>
 #include <esp_lcd_panel_ops.h>
 #include "esp_lcd_st7796.h"
+#include "device_state.h"
 #include <esp_lcd_touch_ft5x06.h>
 #include <esp_lcd_io_i2c.h>
 #include <esp_lvgl_port.h>

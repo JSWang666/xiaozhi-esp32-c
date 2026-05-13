@@ -19,6 +19,7 @@
 #include <esp_adc/adc_oneshot.h>
 #include <button_adc.h>
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "esp32s3_korvo2_v3"
 

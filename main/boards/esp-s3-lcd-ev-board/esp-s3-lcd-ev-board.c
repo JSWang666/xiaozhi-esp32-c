@@ -18,6 +18,7 @@
 #include <esp_lcd_panel_ops.h>
 #include <esp_lcd_panel_io_additions.h>
 #include "esp_io_expander_tca9554.h"
+#include "device_state.h"
 
 #define TAG "ESP_S3_LCD_EV_Board"
 

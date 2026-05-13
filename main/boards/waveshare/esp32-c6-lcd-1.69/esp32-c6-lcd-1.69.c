@@ -14,6 +14,7 @@
 #include <esp_lcd_panel_io.h>
 #include <esp_lcd_panel_ops.h>
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "waveshare_lcd_1_69"
 

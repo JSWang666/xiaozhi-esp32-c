@@ -16,6 +16,7 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "waveshare_c6_amoled_1_32"
 

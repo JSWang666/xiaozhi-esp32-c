@@ -13,6 +13,7 @@
 #include <esp_lcd_panel_ops.h>
 #include "esp_lcd_sh8601.h"
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "WaveshareEsp32c6TouchAMOLED2inch06"
 

@@ -14,6 +14,7 @@
 #include <driver/gpio.h>
 #include <driver/i2c_master.h>
 #include "esp_lcd_gc9503.h"
+#include "device_state.h"
 #include <esp_lcd_panel_io.h>
 #include <esp_lcd_panel_ops.h>
 #include <esp_lcd_panel_io_additions.h>

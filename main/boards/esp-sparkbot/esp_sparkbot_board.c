@@ -16,6 +16,7 @@
 #include <driver/spi_common.h>
 #include <driver/uart.h>
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "esp_sparkbot"
 

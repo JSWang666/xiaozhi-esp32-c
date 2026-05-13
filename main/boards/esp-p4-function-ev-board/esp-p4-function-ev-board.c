@@ -17,6 +17,7 @@
 #include "bsp/esp32_p4_function_ev_board.h"
 #include "bsp/touch.h"
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "ESP32P4FuncEV"
 

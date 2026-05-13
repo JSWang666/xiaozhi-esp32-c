@@ -18,6 +18,7 @@
 #include <esp_lvgl_port.h>
 #include <lvgl.h>
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "WaveshareEsp32c6TouchLCD1inch83"
 

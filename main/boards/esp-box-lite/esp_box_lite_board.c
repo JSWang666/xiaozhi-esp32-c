@@ -18,6 +18,7 @@
 #include <button_adc.h>
 #include "esp_lcd_ili9341.h"
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "EspBoxBoardLite"
 

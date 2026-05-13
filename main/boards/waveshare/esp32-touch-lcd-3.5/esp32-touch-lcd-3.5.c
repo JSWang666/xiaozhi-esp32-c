@@ -21,6 +21,7 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "waveshare_lcd_3_5"
 

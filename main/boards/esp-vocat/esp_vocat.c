@@ -21,6 +21,7 @@
 #include <freertos/task.h>
 #include "driver/temperature_sensor.h"
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "ESP-VoCat"
 

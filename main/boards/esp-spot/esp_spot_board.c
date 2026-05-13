@@ -14,6 +14,7 @@
 #include <driver/gpio.h>
 #include <driver/i2c_master.h>
 #include "c_api/board_c_api.h"
+#include "device_state.h"
 
 #define TAG "esp_spot"
 
