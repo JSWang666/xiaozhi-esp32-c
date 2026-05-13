@@ -24,6 +24,7 @@ display_t *custom_rlcd_display_create(const spi_display_config_t *cfg, int width
 #include <esp_adc/adc_oneshot.h>
 #include <esp_adc/adc_cali.h>
 #include <esp_adc/adc_cali_scheme.h>
+#include "c_api/board_c_api.h"
 
 #define TAG "waveshare_rlcd_4_2"
 
@@ -44,7 +45,10 @@ static void on_boot_click(void *ud)
     (void)ud;
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 

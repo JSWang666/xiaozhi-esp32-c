@@ -18,6 +18,7 @@
 #include <driver/spi_common.h>
 #include <esp_adc/adc_oneshot.h>
 #include <button_adc.h>
+#include "c_api/board_c_api.h"
 
 #define TAG "esp32s3_korvo2_v3"
 
@@ -64,7 +65,10 @@ static void on_boot_click(void *ud)
     (void)ud;
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 

@@ -19,6 +19,7 @@
 #include <esp_lcd_panel_ops.h>
 #include <esp_lcd_ili9341.h>
 #include <esp_timer.h>
+#include "c_api/board_c_api.h"
 
 audio_codec_t *cores3_audio_codec_create(void *i2c_master_handle,
     int input_sample_rate, int output_sample_rate,
@@ -126,7 +127,10 @@ static void poll_touchpad_cb(void *arg)
         if (duration < TOUCH_THRESHOLD_MS) {
             app_context_t *app = app_get_context();
             if (app) {
-                if (app_get_device_state(app) == kDeviceStateStarting) return;
+                if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
                 app_toggle_chat(app);
             }
         }

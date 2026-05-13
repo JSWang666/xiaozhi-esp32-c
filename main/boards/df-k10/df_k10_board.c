@@ -24,6 +24,7 @@
 
 #include "esp_lcd_ili9341.h"
 #include "esp_io_expander_tca95xx_16bit.h"
+#include "c_api/board_c_api.h"
 
 #define TAG "DF-K10"
 
@@ -146,7 +147,10 @@ static void btn_a_click_cb(void *button_handle, void *usr_data)
 {
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 
@@ -164,7 +168,10 @@ static void btn_b_click_cb(void *button_handle, void *usr_data)
 {
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 

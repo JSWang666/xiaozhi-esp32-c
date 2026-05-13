@@ -22,6 +22,7 @@
 #include <driver/i2c_master.h>
 #include <esp_lcd_touch_gt911.h>
 #include <esp_lcd_touch_st7123.h>
+#include "c_api/board_c_api.h"
 
 audio_codec_t *tab5_audio_codec_create(void *i2c_master_handle,
     int input_sample_rate, int output_sample_rate,
@@ -104,7 +105,10 @@ static void on_boot_click(void *ud)
     (void)ud;
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 

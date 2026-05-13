@@ -21,6 +21,7 @@
 #include <esp_lcd_io_i2c.h>
 #include <driver/rtc_io.h>
 #include <esp_sleep.h>
+#include "c_api/board_c_api.h"
 
 #define TAG "XINGZHI_CUBE_0_96OLED_WIFI"
 
@@ -50,7 +51,10 @@ static void on_boot_click(void *ud)
     power_save_timer_wake_up(ctx->pst);
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 

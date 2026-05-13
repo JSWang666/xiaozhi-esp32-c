@@ -30,6 +30,7 @@
 #include <nvs_flash.h>
 #include <esp_app_desc.h>
 #include <lvgl.h>
+#include "c_api/board_c_api.h"
 
 audio_codec_t *sensecap_audio_codec_create(void *i2c_master_handle,
     int input_sample_rate, int output_sample_rate,
@@ -274,7 +275,10 @@ static void btn_single_click_cb(void *button_handle, void *usr_data)
     power_save_timer_wake_up(ctx->pst);
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 

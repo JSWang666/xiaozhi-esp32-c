@@ -27,6 +27,7 @@
 #include "esp_ldo_regulator.h"
 #include "hi8561_driver.h"
 #include "rm69a10_driver.h"
+#include "c_api/board_c_api.h"
 #endif
 
 #define TAG "LilygoTDisplayP4Board"
@@ -236,6 +237,7 @@ static void on_boot_click(void *ud)
     app_context_t *app = app_get_context();
     if (!app) return;
     if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
         return;
     }
     app_toggle_chat(app);

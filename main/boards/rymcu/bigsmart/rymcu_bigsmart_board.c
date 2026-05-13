@@ -16,6 +16,7 @@
 #include <esp_lcd_panel_vendor.h>
 #include <driver/gpio.h>
 #include <driver/spi_common.h>
+#include "c_api/board_c_api.h"
 
 #define TAG "RymcuBigsmartBoard"
 
@@ -36,7 +37,10 @@ static void on_boot_click(void *ud)
     (void)ud;
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 

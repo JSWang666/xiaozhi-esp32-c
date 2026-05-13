@@ -17,6 +17,7 @@
 #include <esp_adc/adc_oneshot.h>
 #include <button_adc.h>
 #include "esp_lcd_ili9341.h"
+#include "c_api/board_c_api.h"
 
 #define TAG "EspBoxBoardLite"
 
@@ -65,7 +66,10 @@ static void on_toggle_click(void *ud)
     (void)ud;
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 

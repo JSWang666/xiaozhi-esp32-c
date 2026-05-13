@@ -10,6 +10,7 @@
 #include <sys/time.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
+#include "c_api/board_c_api.h"
 
 #define TAG "Cst816x"
 
@@ -160,7 +161,10 @@ static void touchpad_daemon(void *arg)
                 if (current_event.x == 40) {
                     app_context_t *app = app_get_context();
                     if (app) {
-                        if (app_get_device_state(app) == kDeviceStateStarting) return;
+                        if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
                         app_toggle_chat(app);
                     }
                 } else if (current_event.x == 20 && codec) {

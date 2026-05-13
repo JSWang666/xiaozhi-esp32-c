@@ -21,6 +21,7 @@
 
 #include "esp_lcd_ili9341.h"
 #include "audio/audio_codec.h"
+#include "c_api/board_c_api.h"
 
 #define TAG "ESP_SensairShuttle"
 
@@ -79,7 +80,7 @@ static void touch_event_task(void *arg)
             app_context_t *app = app_get_context();
             if (app) {
                 if (app_get_device_state(app) == kDeviceStateStarting) {
-                    /* Skip wifi config mode - no C API for it */
+                    board_enter_wifi_config_mode(board_get_instance());
                 } else {
                     app_toggle_chat(app);
                 }
@@ -95,7 +96,10 @@ static void on_boot_click(void *ud)
     (void)ud;
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 

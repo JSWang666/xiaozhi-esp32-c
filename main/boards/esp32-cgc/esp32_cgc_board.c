@@ -25,6 +25,7 @@
 
 #if defined(LCD_TYPE_GC9A01_SERIAL)
 #include <esp_lcd_gc9a01.h>
+#include "c_api/board_c_api.h"
 static const gc9a01_lcd_init_cmd_t gc9107_lcd_init_cmds[] = {
     {0xfe, (uint8_t[]){0x00}, 0, 0},
     {0xef, (uint8_t[]){0x00}, 0, 0},
@@ -88,7 +89,10 @@ static void on_boot_click(void *ud)
     (void)ud;
     app_context_t *app = app_get_context();
     if (!app) return;
-    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
     app_toggle_chat(app);
 }
 
