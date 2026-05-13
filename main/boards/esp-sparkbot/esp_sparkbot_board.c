@@ -11,10 +11,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <esp_log.h>
+#include <esp_lcd_panel_io.h>
+#include <esp_lcd_panel_ops.h>
 #include <esp_lcd_panel_vendor.h>
 #include <driver/i2c_master.h>
 #include <driver/spi_common.h>
 #include <driver/uart.h>
+#include <es8311_codec.h>
 #include "c_api/board_c_api.h"
 #include "device_state.h"
 
