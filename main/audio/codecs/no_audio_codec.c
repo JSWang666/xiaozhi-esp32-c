@@ -10,9 +10,16 @@
 
 #define TAG "NoAudioCodec"
 
+/* Per-instance int32 staging buffer used by write/read. Sized to comfortably
+ * fit the largest frame produced by audio_service (~30ms @ 48kHz stereo).
+ * If the request exceeds this, we fall back to a one-shot heap alloc. */
+#define NO_AUDIO_STATIC_SAMPLES 2048
+
 typedef struct {
     audio_codec_t base;
     SemaphoreHandle_t data_if_mutex;
+    int32_t *write_buffer;  /* size = NO_AUDIO_STATIC_SAMPLES * sizeof(int32_t) */
+    int32_t *read_buffer;
 } no_audio_codec_t;
 
 static int no_audio_write(audio_codec_t *codec, const int16_t *data, int samples)
@@ -20,10 +27,15 @@ static int no_audio_write(audio_codec_t *codec, const int16_t *data, int samples
     no_audio_codec_t *impl = (no_audio_codec_t *)codec;
     xSemaphoreTake(impl->data_if_mutex, portMAX_DELAY);
 
-    int32_t *buffer = (int32_t *)malloc(samples * sizeof(int32_t));
-    if (!buffer) {
-        xSemaphoreGive(impl->data_if_mutex);
-        return 0;
+    int32_t *buffer = impl->write_buffer;
+    bool heap_alloc = false;
+    if (samples > NO_AUDIO_STATIC_SAMPLES || buffer == NULL) {
+        buffer = (int32_t *)malloc(samples * sizeof(int32_t));
+        if (!buffer) {
+            xSemaphoreGive(impl->data_if_mutex);
+            return 0;
+        }
+        heap_alloc = true;
     }
 
     int32_t volume_factor = (int32_t)(pow((double)codec->output_volume / 100.0, 2) * 65536);
@@ -40,21 +52,27 @@ static int no_audio_write(audio_codec_t *codec, const int16_t *data, int samples
 
     size_t bytes_written;
     ESP_ERROR_CHECK(i2s_channel_write(codec->tx_handle, buffer, samples * sizeof(int32_t), &bytes_written, portMAX_DELAY));
-    free(buffer);
+    if (heap_alloc) free(buffer);
     xSemaphoreGive(impl->data_if_mutex);
     return (int)(bytes_written / sizeof(int32_t));
 }
 
 static int no_audio_read(audio_codec_t *codec, int16_t *dest, int samples)
 {
+    no_audio_codec_t *impl = (no_audio_codec_t *)codec;
     size_t bytes_read;
     const TickType_t read_timeout = pdMS_TO_TICKS(200);
 
-    int32_t *bit32_buffer = (int32_t *)malloc(samples * sizeof(int32_t));
-    if (!bit32_buffer) return 0;
+    int32_t *bit32_buffer = impl->read_buffer;
+    bool heap_alloc = false;
+    if (samples > NO_AUDIO_STATIC_SAMPLES || bit32_buffer == NULL) {
+        bit32_buffer = (int32_t *)malloc(samples * sizeof(int32_t));
+        if (!bit32_buffer) return 0;
+        heap_alloc = true;
+    }
 
     if (i2s_channel_read(codec->rx_handle, bit32_buffer, samples * sizeof(int32_t), &bytes_read, read_timeout) != ESP_OK) {
-        free(bit32_buffer);
+        if (heap_alloc) free(bit32_buffer);
         return 0;
     }
 
@@ -63,7 +81,7 @@ static int no_audio_read(audio_codec_t *codec, int16_t *dest, int samples)
         int32_t value = bit32_buffer[i] >> 12;
         dest[i] = (value > INT16_MAX) ? INT16_MAX : (value < -INT16_MAX) ? -INT16_MAX : (int16_t)value;
     }
-    free(bit32_buffer);
+    if (heap_alloc) free(bit32_buffer);
     return samples;
 }
 
@@ -113,6 +131,8 @@ static void no_audio_destroy(audio_codec_t *codec)
     if (impl->data_if_mutex) {
         vSemaphoreDelete(impl->data_if_mutex);
     }
+    free(impl->write_buffer);
+    free(impl->read_buffer);
     free(impl);
 }
 
@@ -139,6 +159,10 @@ static no_audio_codec_t *no_audio_alloc(void)
         free(impl);
         return NULL;
     }
+    impl->write_buffer = (int32_t *)malloc(NO_AUDIO_STATIC_SAMPLES * sizeof(int32_t));
+    impl->read_buffer  = (int32_t *)malloc(NO_AUDIO_STATIC_SAMPLES * sizeof(int32_t));
+    /* If the static buffers fail to allocate we still proceed; the hot path
+     * will fall back to per-call malloc for that codec. */
     return impl;
 }
 

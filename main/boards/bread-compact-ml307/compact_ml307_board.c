@@ -315,6 +315,9 @@ board_desc_t *create_board_desc(void)
     ctx->base.get_audio_codec = cmb_get_audio_codec;
     ctx->base.get_display = cmb_get_display;
     ctx->base.destroy = cmb_destroy;
+    ctx->base.modem_tx_pin = ML307_TX_PIN;
+    ctx->base.modem_rx_pin = ML307_RX_PIN;
+    ctx->base.modem_dtr_pin = GPIO_NUM_NC;
 
     init_display_i2c(ctx);
     init_ssd1306_display(ctx);

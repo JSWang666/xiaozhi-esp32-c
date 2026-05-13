@@ -95,6 +95,12 @@ bool audio_codec_input_data(audio_codec_t *codec, int16_t *data, int samples)
 void audio_codec_destroy(audio_codec_t *codec)
 {
     if (!codec) return;
-    if (codec->ops && codec->ops->destroy)
-        codec->ops->destroy(codec);
+    /* Several board codecs implement their destroy ops by calling
+     * audio_codec_destroy(codec) again as a "base teardown" — which would
+     * otherwise infinite-recurse. Detach ops before dispatching so the
+     * re-entrant call sees a no-op. */
+    const audio_codec_ops_t *ops = codec->ops;
+    if (!ops || !ops->destroy) return;
+    codec->ops = NULL;
+    ops->destroy(codec);
 }

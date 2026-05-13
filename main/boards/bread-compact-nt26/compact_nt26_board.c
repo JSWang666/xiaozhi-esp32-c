@@ -310,6 +310,11 @@ board_desc_t *create_board_desc(void)
     ctx->base.get_audio_codec = cnb_get_audio_codec;
     ctx->base.get_display = cnb_get_display;
     ctx->base.destroy = cnb_destroy;
+    ctx->base.modem_tx_pin = NT26_TX_PIN;
+    ctx->base.modem_rx_pin = NT26_RX_PIN;
+    ctx->base.modem_dtr_pin = NT26_DTR_PIN;
+    ctx->base.modem_ri_pin = NT26_RI_PIN;
+    ctx->base.modem_reset_pin = GPIO_NUM_NC;
 
     init_display_i2c(ctx);
     init_ssd1306_display(ctx);

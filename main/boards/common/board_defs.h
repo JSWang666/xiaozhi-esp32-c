@@ -34,6 +34,17 @@ struct board_desc {
     bool (*get_temperature)(board_desc_t *self, float *temperature);
 
     void (*destroy)(board_desc_t *self);
+
+    /* Modem/network pin configuration, used only for non-Wi-Fi board kinds.
+     * GPIO numbers are plain int so this header has no driver dependency;
+     * pass GPIO_NUM_NC (-1) for unused pins. Default of 0 (left by calloc)
+     * is _not_ valid — boards declaring ML307/NT26/DUAL MUST set these. */
+    int modem_tx_pin;       /* ML307 / NT26 / DUAL */
+    int modem_rx_pin;       /* ML307 / NT26 / DUAL */
+    int modem_dtr_pin;      /* ML307 / NT26 / DUAL — may be GPIO_NUM_NC */
+    int modem_ri_pin;       /* NT26 only — may be GPIO_NUM_NC */
+    int modem_reset_pin;    /* NT26 only — may be GPIO_NUM_NC */
+    int default_net_type;   /* DUAL only: 0 = Wi-Fi, 1 = ML307 */
 };
 
 board_desc_t *create_board_desc(void);
