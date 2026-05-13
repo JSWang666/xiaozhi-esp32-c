@@ -1,0 +1,204 @@
+#include "board_defs.h"
+#include "button.h"
+#include "config.h"
+#include "c_api/app_c_api.h"
+#include "c_api/display_c_api.h"
+#include "audio/codecs/no_audio_codec.h"
+#include "backlight.h"
+#include "device_state.h"
+
+#include <stdlib.h>
+#include <string.h>
+#include <esp_log.h>
+#include <driver/i2c_master.h>
+#include <driver/spi_master.h>
+#include <esp_lcd_panel_io.h>
+#include <esp_lcd_panel_ops.h>
+#include <esp_lcd_spd2010.h>
+#include <esp_lcd_io_spi.h>
+#include "esp_io_expander_tca9554.h"
+
+#define TAG "waveshare_lcd_1_46"
+
+typedef struct {
+    board_desc_t base;
+
+    i2c_master_bus_handle_t i2c_bus;
+    esp_io_expander_handle_t io_expander;
+    esp_lcd_panel_io_handle_t panel_io;
+    esp_lcd_panel_handle_t panel;
+
+    audio_codec_t *codec;
+    display_t *display;
+    backlight_t *backlight;
+
+    board_btn_t *boot_button;
+} ws146_ctx_t;
+
+static void on_boot_click(void *ud)
+{
+    (void)ud;
+    app_context_t *app = app_get_context();
+    if (!app) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) return;
+    app_toggle_chat(app);
+}
+
+static void init_i2c(ws146_ctx_t *ctx)
+{
+    i2c_master_bus_config_t cfg = {
+        .i2c_port = 0,
+        .sda_io_num = I2C_SDA_IO,
+        .scl_io_num = I2C_SCL_IO,
+        .clk_source = I2C_CLK_SRC_DEFAULT,
+    };
+    ESP_ERROR_CHECK(i2c_new_master_bus(&cfg, &ctx->i2c_bus));
+}
+
+static void init_tca9554(ws146_ctx_t *ctx)
+{
+    esp_err_t ret = esp_io_expander_new_i2c_tca9554(ctx->i2c_bus, I2C_ADDRESS, &ctx->io_expander);
+    if (ret != ESP_OK)
+        ESP_LOGE(TAG, "TCA9554 create returned error");
+
+    ret = esp_io_expander_set_dir(ctx->io_expander,
+        IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, IO_EXPANDER_OUTPUT);
+    ESP_ERROR_CHECK(ret);
+    ret = esp_io_expander_set_level(ctx->io_expander,
+        IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, 1);
+    ESP_ERROR_CHECK(ret);
+    vTaskDelay(pdMS_TO_TICKS(300));
+    ret = esp_io_expander_set_level(ctx->io_expander,
+        IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, 0);
+    ESP_ERROR_CHECK(ret);
+    vTaskDelay(pdMS_TO_TICKS(300));
+    ret = esp_io_expander_set_level(ctx->io_expander,
+        IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, 1);
+    ESP_ERROR_CHECK(ret);
+}
+
+static void init_spi(void)
+{
+    ESP_LOGI(TAG, "Initialize QSPI bus");
+    const spi_bus_config_t bus_config = TAIJIPI_SPD2010_PANEL_BUS_QSPI_CONFIG(
+        QSPI_PIN_NUM_LCD_PCLK,
+        QSPI_PIN_NUM_LCD_DATA0, QSPI_PIN_NUM_LCD_DATA1,
+        QSPI_PIN_NUM_LCD_DATA2, QSPI_PIN_NUM_LCD_DATA3,
+        QSPI_LCD_H_RES * 80 * sizeof(uint16_t));
+    ESP_ERROR_CHECK(spi_bus_initialize(QSPI_LCD_HOST, &bus_config, SPI_DMA_CH_AUTO));
+}
+
+static void init_spd2010_display(ws146_ctx_t *ctx)
+{
+    ESP_LOGI(TAG, "Install panel IO");
+    const esp_lcd_panel_io_spi_config_t io_config =
+        SPD2010_PANEL_IO_QSPI_CONFIG(QSPI_PIN_NUM_LCD_CS, NULL, NULL);
+    ESP_ERROR_CHECK(esp_lcd_new_panel_io_spi(
+        (esp_lcd_spi_bus_handle_t)QSPI_LCD_HOST, &io_config, &ctx->panel_io));
+
+    ESP_LOGI(TAG, "Install SPD2010 panel driver");
+    spd2010_vendor_config_t vendor_config = {
+        .flags = { .use_qspi_interface = 1 },
+    };
+    const esp_lcd_panel_dev_config_t panel_config = {
+        .reset_gpio_num = QSPI_PIN_NUM_LCD_RST,
+        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB,
+        .bits_per_pixel = QSPI_LCD_BIT_PER_PIXEL,
+        .vendor_config = &vendor_config,
+    };
+    ESP_ERROR_CHECK(esp_lcd_new_panel_spd2010(ctx->panel_io, &panel_config, &ctx->panel));
+
+    esp_lcd_panel_reset(ctx->panel);
+    esp_lcd_panel_init(ctx->panel);
+    esp_lcd_panel_disp_on_off(ctx->panel, true);
+    esp_lcd_panel_swap_xy(ctx->panel, DISPLAY_SWAP_XY);
+    esp_lcd_panel_mirror(ctx->panel, DISPLAY_MIRROR_X, DISPLAY_MIRROR_Y);
+
+    ctx->display = spi_lcd_display_create(ctx->panel_io, ctx->panel,
+        DISPLAY_WIDTH, DISPLAY_HEIGHT, DISPLAY_OFFSET_X, DISPLAY_OFFSET_Y,
+        DISPLAY_MIRROR_X, DISPLAY_MIRROR_Y, DISPLAY_SWAP_XY);
+}
+
+static void init_buttons_custom(void)
+{
+    gpio_reset_pin(BOOT_BUTTON_GPIO);
+    gpio_set_direction(BOOT_BUTTON_GPIO, GPIO_MODE_INPUT);
+    gpio_reset_pin(PWR_BUTTON_GPIO);
+    gpio_set_direction(PWR_BUTTON_GPIO, GPIO_MODE_INPUT);
+    gpio_reset_pin(PWR_Control_PIN);
+    gpio_set_direction(PWR_Control_PIN, GPIO_MODE_OUTPUT);
+    gpio_set_level(PWR_Control_PIN, true);
+}
+
+static void init_buttons(ws146_ctx_t *ctx)
+{
+    init_buttons_custom();
+
+    board_btn_gpio_cfg_t boot_cfg = { .gpio_num = BOOT_BUTTON_GPIO };
+    ctx->boot_button = board_btn_create_gpio(&boot_cfg);
+    board_btn_on_click(ctx->boot_button, on_boot_click, ctx);
+}
+
+static const char *get_board_type(board_desc_t *self)
+{
+    (void)self;
+    return BOARD_TYPE;
+}
+
+static void *get_audio_codec(board_desc_t *self)
+{
+    ws146_ctx_t *ctx = (ws146_ctx_t *)self;
+    if (!ctx->codec) {
+        ctx->codec = no_audio_codec_simplex_create(
+            AUDIO_INPUT_SAMPLE_RATE, AUDIO_OUTPUT_SAMPLE_RATE,
+            AUDIO_I2S_SPK_GPIO_BCLK, AUDIO_I2S_SPK_GPIO_LRCK, AUDIO_I2S_SPK_GPIO_DOUT,
+            AUDIO_I2S_MIC_GPIO_SCK, AUDIO_I2S_MIC_GPIO_WS, AUDIO_I2S_MIC_GPIO_DIN);
+    }
+    return ctx->codec;
+}
+
+static void *get_display(board_desc_t *self)
+{
+    ws146_ctx_t *ctx = (ws146_ctx_t *)self;
+    return ctx->display;
+}
+
+static void *get_backlight(board_desc_t *self)
+{
+    ws146_ctx_t *ctx = (ws146_ctx_t *)self;
+    if (!ctx->backlight) {
+        ctx->backlight = pwm_backlight_create(
+            DISPLAY_BACKLIGHT_PIN, DISPLAY_BACKLIGHT_OUTPUT_INVERT, 25000);
+    }
+    return ctx->backlight;
+}
+
+static void destroy(board_desc_t *self)
+{
+    ws146_ctx_t *ctx = (ws146_ctx_t *)self;
+    board_btn_delete(ctx->boot_button);
+    free(ctx);
+}
+
+board_desc_t *create_board_desc(void)
+{
+    ws146_ctx_t *ctx = calloc(1, sizeof(ws146_ctx_t));
+    if (!ctx) return NULL;
+
+    ctx->base.kind = BOARD_KIND_WIFI;
+    ctx->base.get_board_type = get_board_type;
+    ctx->base.get_led = NULL;
+    ctx->base.get_audio_codec = get_audio_codec;
+    ctx->base.get_display = get_display;
+    ctx->base.get_backlight = get_backlight;
+    ctx->base.destroy = destroy;
+
+    init_i2c(ctx);
+    init_tca9554(ctx);
+    init_spi();
+    init_spd2010_display(ctx);
+    init_buttons(ctx);
+    backlight_restore_brightness(get_backlight(&ctx->base));
+
+    return &ctx->base;
+}

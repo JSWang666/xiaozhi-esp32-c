@@ -1,0 +1,2074 @@
+{
+  "root": "/home/wangjs/esp/ai-voice",
+  "main_summary": {
+    "cc_like_count": 239,
+    "c_count": 12,
+    "header_count": 295,
+    "cc_like_files": [
+      "main/application.cc",
+      "main/assets.cc",
+      "main/audio/audio_codec.cc",
+      "main/audio/audio_service.cc",
+      "main/audio/codecs/box_audio_codec.cc",
+      "main/audio/codecs/dummy_audio_codec.cc",
+      "main/audio/codecs/es8311_audio_codec.cc",
+      "main/audio/codecs/es8374_audio_codec.cc",
+      "main/audio/codecs/es8388_audio_codec.cc",
+      "main/audio/codecs/es8389_audio_codec.cc",
+      "main/audio/codecs/no_audio_codec.cc",
+      "main/audio/demuxer/ogg_demuxer.cc",
+      "main/audio/processors/afe_audio_processor.cc",
+      "main/audio/processors/audio_debugger.cc",
+      "main/audio/processors/no_audio_processor.cc",
+      "main/audio/wake_words/afe_wake_word.cc",
+      "main/audio/wake_words/custom_wake_word.cc",
+      "main/audio/wake_words/esp_wake_word.cc",
+      "main/boards/aipi-lite/aipi-lite.cc",
+      "main/boards/atk-dnesp32s3/atk_dnesp32s3.cc",
+      "main/boards/atk-dnesp32s3-box/atk_dnesp32s3_box.cc",
+      "main/boards/atk-dnesp32s3-box0/atk_dnesp32s3_box0.cc",
+      "main/boards/atk-dnesp32s3-box2-4g/atk_dnesp32s3_box2.cc",
+      "main/boards/atk-dnesp32s3-box2-wifi/atk_dnesp32s3_box2.cc",
+      "main/boards/atk-dnesp32s3-box3/atk_dnesp32s3_box3.cc",
+      "main/boards/atk-dnesp32s3m-4g/atk_dnesp32s3m.cc",
+      "main/boards/atk-dnesp32s3m-wifi/atk_dnesp32s3m.cc",
+      "main/boards/atom-echos3r/atom_echos3r.cc",
+      "main/boards/atommatrix-echo-base/atommatrix_echo_base.cc",
+      "main/boards/atoms3-echo-base/atoms3_echo_base.cc",
+      "main/boards/atoms3r-cam-m12-echo-base/atoms3r_cam_m12_echo_base.cc",
+      "main/boards/atoms3r-echo-base/atoms3r_echo_base.cc",
+      "main/boards/atoms3r-echo-pyramid/atoms3r_echo_pyramid.cc",
+      "main/boards/bread-compact-esp32/esp32_bread_board.cc",
+      "main/boards/bread-compact-esp32-lcd/esp32_bread_board_lcd.cc",
+      "main/boards/bread-compact-ml307/compact_ml307_board.cc",
+      "main/boards/bread-compact-nt26/compact_nt26_board.cc",
+      "main/boards/bread-compact-wifi/compact_wifi_board.cc",
+      "main/boards/bread-compact-wifi-lcd/compact_wifi_board_lcd.cc",
+      "main/boards/bread-compact-wifi-s3cam/compact_wifi_board_s3cam.cc",
+      "main/boards/common/adc_battery_monitor.cc",
+      "main/boards/common/afsk_demod.cc",
+      "main/boards/common/axp2101.cc",
+      "main/boards/common/backlight.cc",
+      "main/boards/common/blufi.cpp",
+      "main/boards/common/board.cc",
+      "main/boards/common/button.cc",
+      "main/boards/common/dual_network_board.cc",
+      "main/boards/common/esp32_camera.cc",
+      "main/boards/common/esp_video.cc",
+      "main/boards/common/i2c_device.cc",
+      "main/boards/common/knob.cc",
+      "main/boards/common/ml307_board.cc",
+      "main/boards/common/nt26_board.cc",
+      "main/boards/common/power_save_timer.cc",
+      "main/boards/common/press_to_talk_mcp_tool.cc",
+      "main/boards/common/rndis_board.cc",
+      "main/boards/common/sleep_timer.cc",
+      "main/boards/common/sy6970.cc",
+      "main/boards/common/system_reset.cc",
+      "main/boards/common/wifi_board.cc",
+      "main/boards/df-k10/df_k10_board.cc",
+      "main/boards/df-k10/k10_audio_codec.cc",
+      "main/boards/df-k10/led_control.cc",
+      "main/boards/df-s3-ai-cam/df_s3_ai_cam.cc",
+      "main/boards/doit-s3-aibox/doit_s3_aibox.cc",
+      "main/boards/du-chatx/du-chatx-wifi.cc",
+      "main/boards/electron-bot/electron_bot.cc",
+      "main/boards/electron-bot/electron_bot_controller.cc",
+      "main/boards/electron-bot/electron_emoji_display.cc",
+      "main/boards/electron-bot/movements.cc",
+      "main/boards/electron-bot/oscillator.cc",
+      "main/boards/esp-box/esp_box_board.cc",
+      "main/boards/esp-box-3/esp_box3_board.cc",
+      "main/boards/esp-box-lite/box_audio_codec_lite.cc",
+      "main/boards/esp-box-lite/esp_box_lite_board.cc",
+      "main/boards/esp-hi/adc_pdm_audio_codec.cc",
+      "main/boards/esp-hi/emoji_display.cc",
+      "main/boards/esp-hi/esp_hi.cc",
+      "main/boards/esp-p4-function-ev-board/esp-p4-function-ev-board.cc",
+      "main/boards/esp-s3-lcd-ev-board/esp-s3-lcd-ev-board.cc",
+      "main/boards/esp-s3-lcd-ev-board-2/esp-s3-lcd-ev-board-2.cc",
+      "main/boards/esp-sensairshuttle/adc_pdm_audio_codec.cc",
+      "main/boards/esp-sensairshuttle/esp-sensairshuttle.cc",
+      "main/boards/esp-sparkbot/esp_sparkbot_board.cc",
+      "main/boards/esp-spot/esp_spot_board.cc",
+      "main/boards/esp-vocat/esp_vocat.cc",
+      "main/boards/esp32-cgc/esp32_cgc_board.cc",
+      "main/boards/esp32-cgc-144/esp32_cgc_144_board.cc",
+      "main/boards/esp32s3-korvo2-v3/esp32s3_korvo2_v3_board.cc",
+      "main/boards/esp32s3-korvo2-v3-rndis/esp32s3_korvo2_v3_board.cc",
+      "main/boards/freenove-esp32s3-display-2.8-lcd/freenove-esp32s3-display-2.8-lcd.cc",
+      "main/boards/genjutech-s3-1.54tft/genjutech-s3-1.54tft.cc",
+      "main/boards/hu-087/hu_087_board.cc",
+      "main/boards/jiuchuan-s3/jiuchuan_dev_board.cc",
+      "main/boards/kevin-box-2/kevin_box_board.cc",
+      "main/boards/kevin-c3/kevin_c3_board.cc",
+      "main/boards/kevin-c3/led_strip_control.cc",
+      "main/boards/kevin-sp-v3-dev/kevin-sp-v3_board.cc",
+      "main/boards/kevin-sp-v4-dev/kevin-sp-v4_board.cc",
+      "main/boards/kevin-yuying-313lcd/kevin_yuying_313lcd.cc",
+      "main/boards/labplus-ledong-v2/labplus_ledong_v2.cc",
+      "main/boards/labplus-mpython-v3/mpython_pro.cc",
+      "main/boards/lceda-course-examples/eda-robot-pro/eda_dog_controller.cc",
+      "main/boards/lceda-course-examples/eda-robot-pro/eda_dog_movements.cc",
+      "main/boards/lceda-course-examples/eda-robot-pro/eda_robot_pro.cc",
+      "main/boards/lceda-course-examples/eda-robot-pro/oscillator.cc",
+      "main/boards/lceda-course-examples/eda-super-bear/eda_super_bear.cc",
+      "main/boards/lceda-course-examples/eda-super-bear/eda_super_bear_controller.cc",
+      "main/boards/lceda-course-examples/eda-super-bear/eda_super_bear_movements.cc",
+      "main/boards/lceda-course-examples/eda-super-bear/oscillator.cc",
+      "main/boards/lceda-course-examples/eda-tv-pro/eda-tv-pro.cc",
+      "main/boards/lichuang-c3-dev/lichuang_c3_dev_board.cc",
+      "main/boards/lichuang-dev/lichuang_dev_board.cc",
+      "main/boards/lilygo-t-cameraplus-s3/lilygo-t-cameraplus-s3.cc",
+      "main/boards/lilygo-t-cameraplus-s3/tcamerapluss3_audio_codec.cc",
+      "main/boards/lilygo-t-circle-s3/lilygo-t-circle-s3.cc",
+      "main/boards/lilygo-t-circle-s3/tcircles3_audio_codec.cc",
+      "main/boards/lilygo-t-display-p4/hi8561_driver.cc",
+      "main/boards/lilygo-t-display-p4/lilygo-t-display-p4.cc",
+      "main/boards/lilygo-t-display-p4/rm69a10_driver.cc",
+      "main/boards/lilygo-t-display-s3-pro-mvsrlora/lilygo-t-display-s3-pro-mvsrlora.cc",
+      "main/boards/lilygo-t-display-s3-pro-mvsrlora/tdisplays3promvsrlora_audio_codec.cc",
+      "main/boards/m5stack-cardputer-adv/m5stack_cardputer_adv.cc",
+      "main/boards/m5stack-cardputer-adv/tca8418_keyboard.cc",
+      "main/boards/m5stack-cardputer-adv/wifi_config_ui.cc",
+      "main/boards/m5stack-core-s3/cores3_audio_codec.cc",
+      "main/boards/m5stack-core-s3/m5stack_core_s3.cc",
+      "main/boards/m5stack-tab5/m5stack_tab5.cc",
+      "main/boards/m5stack-tab5/tab5_audio_codec.cc",
+      "main/boards/magiclick-2p4/magiclick_2p4_board.cc",
+      "main/boards/magiclick-2p5/magiclick_2p5_board.cc",
+      "main/boards/magiclick-c3/magiclick_c3_board.cc",
+      "main/boards/magiclick-c3-v2/magiclick_c3_v2_board.cc",
+      "main/boards/minsi-k08-dual/minsi_k08_dual.cc",
+      "main/boards/mixgo-nova/mixgo-nova.cc",
+      "main/boards/movecall-cuican-esp32s3/movecall_cuican_esp32s3.cc",
+      "main/boards/movecall-moji-esp32s3/movecall_moji_esp32s3.cc",
+      "main/boards/movecall-moji2-esp32c5/movecall_moji2_esp32s3.cc",
+      "main/boards/nulllab-ai-vox-v3/ai_vox3_board.cc",
+      "main/boards/otto-robot/oscillator.cc",
+      "main/boards/otto-robot/otto_controller.cc",
+      "main/boards/otto-robot/otto_emoji_display.cc",
+      "main/boards/otto-robot/otto_movements.cc",
+      "main/boards/otto-robot/otto_robot.cc",
+      "main/boards/otto-robot/websocket_control_server.cc",
+      "main/boards/rymcu/bigsmart/rymcu_bigsmart_board.cc",
+      "main/boards/sensecap-watcher/sensecap_audio_codec.cc",
+      "main/boards/sensecap-watcher/sensecap_watcher.cc",
+      "main/boards/sensecap-watcher/sscma_camera.cc",
+      "main/boards/sp-esp32-s3-1.28-box/sp-esp32-s3-1.28-box.cc",
+      "main/boards/sp-esp32-s3-1.54-muma/sp-esp32-s3-1.54-muma.cc",
+      "main/boards/surfer-c3-1.14tft/surfer-c3-1.14tft.cc",
+      "main/boards/taiji-pi-s3/taiji_pi_s3.cc",
+      "main/boards/tudouzi/kevin_box_board.cc",
+      "main/boards/waveshare/esp32-c6-lcd-1.69/esp32-c6-lcd-1.69.cc",
+      "main/boards/waveshare/esp32-c6-touch-amoled-1.32/esp32-c6-touch-amoled-1.32.cc",
+      "main/boards/waveshare/esp32-c6-touch-amoled-1.43/esp32-c6-touch-amoled-1.43.cc",
+      "main/boards/waveshare/esp32-c6-touch-amoled-1.8/esp32-c6-touch-amoled-1.8.cc",
+      "main/boards/waveshare/esp32-c6-touch-amoled-2.06/esp32-c6-touch-amoled-2.06.cc",
+      "main/boards/waveshare/esp32-c6-touch-amoled-2.16/esp32-c6-touch-amoled-2.16.cc",
+      "main/boards/waveshare/esp32-c6-touch-lcd-1.83/esp32-c6-touch-lcd-1.83.cc",
+      "main/boards/waveshare/esp32-p4-nano/esp32-p4-nano.cc",
+      "main/boards/waveshare/esp32-p4-wifi6-touch-lcd/esp32-p4-wifi6-touch-lcd.cc",
+      "main/boards/waveshare/esp32-p4-wifi6-touch-lcd-3.5/esp32-p4-wifi6-touch-lcd-3.5.cc",
+      "main/boards/waveshare/esp32-s3-audio-board/esp32-s3-audio_board.cc",
+      "main/boards/waveshare/esp32-s3-cam/esp32-s3-cam-xxxx.cc",
+      "main/boards/waveshare/esp32-s3-epaper-1.54/board_power_bsp.cc",
+      "main/boards/waveshare/esp32-s3-epaper-1.54/custom_lcd_display.cc",
+      "main/boards/waveshare/esp32-s3-epaper-1.54/waveshare-s3-epaper-1.54.cc",
+      "main/boards/waveshare/esp32-s3-epaper-3.97/custom_lcd_display.cc",
+      "main/boards/waveshare/esp32-s3-epaper-3.97/waveshare-s3-epaper-3.97.cc",
+      "main/boards/waveshare/esp32-s3-lcd-0.85/esp32-s3-lcd-0.85.cc",
+      "main/boards/waveshare/esp32-s3-lcd-0.85/led_strip_control.cc",
+      "main/boards/waveshare/esp32-s3-rlcd-4.2/custom_lcd_display.cc",
+      "main/boards/waveshare/esp32-s3-rlcd-4.2/waveshare-s3-rlcd-4.2.cc",
+      "main/boards/waveshare/esp32-s3-touch-amoled-1.32/esp32-s3-touch-amoled-1.32.cc",
+      "main/boards/waveshare/esp32-s3-touch-amoled-1.43c/esp32-s3-touch-amoled-1.43c.cc",
+      "main/boards/waveshare/esp32-s3-touch-amoled-1.75/esp32-s3-touch-amoled-1.75.cc",
+      "main/boards/waveshare/esp32-s3-touch-amoled-1.8/esp32-s3-touch-amoled-1.8.cc",
+      "main/boards/waveshare/esp32-s3-touch-amoled-2.06/esp32-s3-touch-amoled-2.06.cc",
+      "main/boards/waveshare/esp32-s3-touch-amoled-2.16/esp32-s3-touch-amoled-2.16.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.46/esp32-s3-touch-lcd-1.46.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.54/esp32-s3-touch-lcd-1.54.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.83/esp32-s3-touch-lcd-1.83.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.85/esp32-s3-touch-lcd-1.85.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.85c/esp32-s3-touch-lcd-1.85c.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-3.49/custom_lcd_display.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-3.49/waveshare-s3-touch-lcd-3.49.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-3.5/esp32-s3-touch-lcd-3.5.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-3.5b/custom_lcd_display.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-3.5b/waveshare-s3-touch-lcd-3.5b.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-4.3c/esp32_s3_touch_lcd_4.3c.cc",
+      "main/boards/waveshare/esp32-s3-touch-lcd-4b/esp32-s3-touch-lcd-4b.cc",
+      "main/boards/waveshare/esp32-touch-lcd-3.5/esp32-touch-lcd-3.5.cc",
+      "main/boards/wireless-tag-wtp4c5mp07s/wireless-tag-wtp4c5mp07s.cc",
+      "main/boards/xingzhi-abs-2.0/xingzhi-abs-2.0.cc",
+      "main/boards/xingzhi-cube-0.85tft-ml307/xingzhi-cube-0.85tft-ml307.cc",
+      "main/boards/xingzhi-cube-0.85tft-wifi/xingzhi-cube-0.85tft-wifi.cc",
+      "main/boards/xingzhi-cube-0.96oled-ml307/xingzhi-cube-0.96oled-ml307.cc",
+      "main/boards/xingzhi-cube-0.96oled-wifi/xingzhi-cube-0.96oled-wifi.cc",
+      "main/boards/xingzhi-cube-1.54tft-ml307/xingzhi-cube-1.54tft-ml307.cc",
+      "main/boards/xingzhi-cube-1.54tft-wifi/xingzhi-cube-1.54tft-wifi.cc",
+      "main/boards/xingzhi-metal-1.54-wifi/cst816x.cc",
+      "main/boards/xingzhi-metal-1.54-wifi/xingzhi-metal-1.54-wifi.cc",
+      "main/boards/xmini-c3/xmini_c3_board.cc",
+      "main/boards/xmini-c3-4g/xmini_c3_4g_board.cc",
+      "main/boards/xmini-c3-v3/xmini_c3_board.cc",
+      "main/boards/yunliao-s3/power_manager.cc",
+      "main/boards/yunliao-s3/yunliao_s3.cc",
+      "main/boards/zhengchen-1.54tft-ml307/zhengchen-1.54tft-ml307.cc",
+      "main/boards/zhengchen-1.54tft-wifi/zhengchen-1.54tft-wifi.cc",
+      "main/boards/zhengchen-cam/mcp_controller.cc",
+      "main/boards/zhengchen-cam/zhengchen_cam_board.cc",
+      "main/boards/zhengchen-cam-ml307/mcp_controller.cc",
+      "main/boards/zhengchen-cam-ml307/zhengchen_cam_board_ml307.cc",
+      "main/device_state_machine.cc",
+      "main/display/display.cc",
+      "main/display/emote_display.cc",
+      "main/display/lcd_display.cc",
+      "main/display/lvgl_display/emoji_collection.cc",
+      "main/display/lvgl_display/gif/lvgl_gif.cc",
+      "main/display/lvgl_display/jpg/image_to_jpeg.cpp",
+      "main/display/lvgl_display/lvgl_display.cc",
+      "main/display/lvgl_display/lvgl_font.cc",
+      "main/display/lvgl_display/lvgl_image.cc",
+      "main/display/lvgl_display/lvgl_theme.cc",
+      "main/display/oled_display.cc",
+      "main/led/circular_strip.cc",
+      "main/led/gpio_led.cc",
+      "main/led/single_led.cc",
+      "main/main.cc",
+      "main/mcp_server.cc",
+      "main/ota.cc",
+      "main/protocols/mqtt_protocol.cc",
+      "main/protocols/protocol.cc",
+      "main/protocols/websocket_protocol.cc",
+      "main/settings.cc",
+      "main/system_info.cc"
+    ],
+    "c_files": [
+      "main/boards/electron-bot/otto_icon_font.c",
+      "main/boards/esp-s3-lcd-ev-board/esp_io_expander_tca9554.c",
+      "main/boards/esp-s3-lcd-ev-board/esp_lcd_gc9503.c",
+      "main/boards/esp-s3-lcd-ev-board-2/esp_lcd_gc9503.c",
+      "main/boards/jiuchuan-s3/esp_lcd_panel_gc9301.c",
+      "main/boards/kevin-yuying-313lcd/esp_lcd_gc9503.c",
+      "main/boards/lilygo-t-circle-s3/esp_lcd_gc9d01n.c",
+      "main/boards/m5stack-tab5/esp_lcd_st7123.c",
+      "main/boards/otto-robot/otto_icon_font.c",
+      "main/boards/waveshare/esp32-s3-audio-board/esp_lcd_jd9853.c",
+      "main/display/lvgl_display/gif/gifdec.c",
+      "main/display/lvgl_display/jpg/jpeg_to_image.c"
+    ],
+    "header_files": [
+      "main/application.h",
+      "main/assets/lang_config.h",
+      "main/assets.h",
+      "main/audio/audio_codec.h",
+      "main/audio/audio_processor.h",
+      "main/audio/audio_service.h",
+      "main/audio/codecs/box_audio_codec.h",
+      "main/audio/codecs/dummy_audio_codec.h",
+      "main/audio/codecs/es8311_audio_codec.h",
+      "main/audio/codecs/es8374_audio_codec.h",
+      "main/audio/codecs/es8388_audio_codec.h",
+      "main/audio/codecs/es8389_audio_codec.h",
+      "main/audio/codecs/no_audio_codec.h",
+      "main/audio/demuxer/ogg_demuxer.h",
+      "main/audio/processors/afe_audio_processor.h",
+      "main/audio/processors/audio_debugger.h",
+      "main/audio/processors/no_audio_processor.h",
+      "main/audio/wake_word.h",
+      "main/audio/wake_words/afe_wake_word.h",
+      "main/audio/wake_words/custom_wake_word.h",
+      "main/audio/wake_words/esp_wake_word.h",
+      "main/boards/aipi-lite/config.h",
+      "main/boards/aipi-lite/power_manager.h",
+      "main/boards/atk-dnesp32s3/config.h",
+      "main/boards/atk-dnesp32s3-box/config.h",
+      "main/boards/atk-dnesp32s3-box0/config.h",
+      "main/boards/atk-dnesp32s3-box0/power_manager.h",
+      "main/boards/atk-dnesp32s3-box2-4g/config.h",
+      "main/boards/atk-dnesp32s3-box2-4g/power_manager.h",
+      "main/boards/atk-dnesp32s3-box2-wifi/config.h",
+      "main/boards/atk-dnesp32s3-box2-wifi/power_manager.h",
+      "main/boards/atk-dnesp32s3-box3/config.h",
+      "main/boards/atk-dnesp32s3-box3/power_manager.h",
+      "main/boards/atk-dnesp32s3m-4g/config.h",
+      "main/boards/atk-dnesp32s3m-wifi/config.h",
+      "main/boards/atom-echos3r/config.h",
+      "main/boards/atommatrix-echo-base/config.h",
+      "main/boards/atoms3-echo-base/config.h",
+      "main/boards/atoms3r-cam-m12-echo-base/config.h",
+      "main/boards/atoms3r-echo-base/config.h",
+      "main/boards/atoms3r-echo-pyramid/config.h",
+      "main/boards/bread-compact-esp32/config.h",
+      "main/boards/bread-compact-esp32-lcd/config.h",
+      "main/boards/bread-compact-ml307/config.h",
+      "main/boards/bread-compact-nt26/config.h",
+      "main/boards/bread-compact-wifi/config.h",
+      "main/boards/bread-compact-wifi-lcd/config.h",
+      "main/boards/bread-compact-wifi-s3cam/config.h",
+      "main/boards/common/adc_battery_monitor.h",
+      "main/boards/common/afsk_demod.h",
+      "main/boards/common/axp2101.h",
+      "main/boards/common/backlight.h",
+      "main/boards/common/blufi.h",
+      "main/boards/common/board.h",
+      "main/boards/common/button.h",
+      "main/boards/common/camera.h",
+      "main/boards/common/dual_network_board.h",
+      "main/boards/common/esp32_camera.h",
+      "main/boards/common/esp_video.h",
+      "main/boards/common/i2c_device.h",
+      "main/boards/common/knob.h",
+      "main/boards/common/lamp_controller.h",
+      "main/boards/common/ml307_board.h",
+      "main/boards/common/nt26_board.h",
+      "main/boards/common/power_save_timer.h",
+      "main/boards/common/press_to_talk_mcp_tool.h",
+      "main/boards/common/rndis_board.h",
+      "main/boards/common/sleep_timer.h",
+      "main/boards/common/sy6970.h",
+      "main/boards/common/system_reset.h",
+      "main/boards/common/wifi_board.h",
+      "main/boards/df-k10/config.h",
+      "main/boards/df-k10/k10_audio_codec.h",
+      "main/boards/df-k10/led_control.h",
+      "main/boards/df-s3-ai-cam/config.h",
+      "main/boards/doit-s3-aibox/config.h",
+      "main/boards/du-chatx/config.h",
+      "main/boards/du-chatx/power_manager.h",
+      "main/boards/electron-bot/config.h",
+      "main/boards/electron-bot/electron_emoji_display.h",
+      "main/boards/electron-bot/movements.h",
+      "main/boards/electron-bot/oscillator.h",
+      "main/boards/electron-bot/power_manager.h",
+      "main/boards/esp-box/config.h",
+      "main/boards/esp-box-3/config.h",
+      "main/boards/esp-box-lite/box_audio_codec_lite.h",
+      "main/boards/esp-box-lite/config.h",
+      "main/boards/esp-hi/adc_pdm_audio_codec.h",
+      "main/boards/esp-hi/config.h",
+      "main/boards/esp-hi/emoji_display.h",
+      "main/boards/esp-p4-function-ev-board/config.h",
+      "main/boards/esp-s3-lcd-ev-board/config.h",
+      "main/boards/esp-s3-lcd-ev-board/esp_io_expander_tca9554.h",
+      "main/boards/esp-s3-lcd-ev-board/esp_lcd_gc9503.h",
+      "main/boards/esp-s3-lcd-ev-board/pin_config.h",
+      "main/boards/esp-s3-lcd-ev-board-2/config.h",
+      "main/boards/esp-s3-lcd-ev-board-2/esp_lcd_gc9503.h",
+      "main/boards/esp-s3-lcd-ev-board-2/pin_config.h",
+      "main/boards/esp-sensairshuttle/adc_pdm_audio_codec.h",
+      "main/boards/esp-sensairshuttle/config.h",
+      "main/boards/esp-sparkbot/config.h",
+      "main/boards/esp-spot/config.h",
+      "main/boards/esp-vocat/config.h",
+      "main/boards/esp-vocat/touch.h",
+      "main/boards/esp32-cgc/config.h",
+      "main/boards/esp32-cgc-144/config.h",
+      "main/boards/esp32-cgc-144/power_manager.h",
+      "main/boards/esp32-cgc-144/power_manager_lite.h",
+      "main/boards/esp32s3-korvo2-v3/config.h",
+      "main/boards/esp32s3-korvo2-v3/power_manager.h",
+      "main/boards/esp32s3-korvo2-v3-rndis/config.h",
+      "main/boards/esp32s3-korvo2-v3-rndis/power_manager.h",
+      "main/boards/freenove-esp32s3-display-2.8-lcd/config.h",
+      "main/boards/genjutech-s3-1.54tft/config.h",
+      "main/boards/genjutech-s3-1.54tft/power_manager.h",
+      "main/boards/hu-087/config.h",
+      "main/boards/jiuchuan-s3/config.h",
+      "main/boards/jiuchuan-s3/esp_lcd_panel_gc9301.h",
+      "main/boards/jiuchuan-s3/gpio_manager.h",
+      "main/boards/jiuchuan-s3/power_controller.h",
+      "main/boards/jiuchuan-s3/power_manager.h",
+      "main/boards/kevin-box-2/config.h",
+      "main/boards/kevin-c3/config.h",
+      "main/boards/kevin-c3/led_strip_control.h",
+      "main/boards/kevin-sp-v3-dev/config.h",
+      "main/boards/kevin-sp-v4-dev/config.h",
+      "main/boards/kevin-yuying-313lcd/config.h",
+      "main/boards/kevin-yuying-313lcd/esp_lcd_gc9503.h",
+      "main/boards/kevin-yuying-313lcd/pin_config.h",
+      "main/boards/labplus-ledong-v2/config.h",
+      "main/boards/labplus-mpython-v3/config.h",
+      "main/boards/lceda-course-examples/eda-robot-pro/config.h",
+      "main/boards/lceda-course-examples/eda-robot-pro/eda_dog_movements.h",
+      "main/boards/lceda-course-examples/eda-robot-pro/oscillator.h",
+      "main/boards/lceda-course-examples/eda-super-bear/config.h",
+      "main/boards/lceda-course-examples/eda-super-bear/eda_super_bear_movements.h",
+      "main/boards/lceda-course-examples/eda-super-bear/oscillator.h",
+      "main/boards/lceda-course-examples/eda-tv-pro/config.h",
+      "main/boards/lichuang-c3-dev/config.h",
+      "main/boards/lichuang-dev/config.h",
+      "main/boards/lilygo-t-cameraplus-s3/config.h",
+      "main/boards/lilygo-t-cameraplus-s3/ir_filter_controller.h",
+      "main/boards/lilygo-t-cameraplus-s3/pin_config.h",
+      "main/boards/lilygo-t-cameraplus-s3/tcamerapluss3_audio_codec.h",
+      "main/boards/lilygo-t-circle-s3/config.h",
+      "main/boards/lilygo-t-circle-s3/esp_lcd_gc9d01n.h",
+      "main/boards/lilygo-t-circle-s3/pin_config.h",
+      "main/boards/lilygo-t-circle-s3/tcircles3_audio_codec.h",
+      "main/boards/lilygo-t-display-p4/config.h",
+      "main/boards/lilygo-t-display-p4/hi8561_driver.h",
+      "main/boards/lilygo-t-display-p4/rm69a10_driver.h",
+      "main/boards/lilygo-t-display-p4/t_display_p4_config.h",
+      "main/boards/lilygo-t-display-s3-pro-mvsrlora/config.h",
+      "main/boards/lilygo-t-display-s3-pro-mvsrlora/pin_config.h",
+      "main/boards/lilygo-t-display-s3-pro-mvsrlora/tdisplays3promvsrlora_audio_codec.h",
+      "main/boards/m5stack-cardputer-adv/config.h",
+      "main/boards/m5stack-cardputer-adv/tca8418_keyboard.h",
+      "main/boards/m5stack-cardputer-adv/wifi_config_ui.h",
+      "main/boards/m5stack-core-s3/config.h",
+      "main/boards/m5stack-core-s3/cores3_audio_codec.h",
+      "main/boards/m5stack-tab5/config.h",
+      "main/boards/m5stack-tab5/esp_lcd_st7123.h",
+      "main/boards/m5stack-tab5/tab5_audio_codec.h",
+      "main/boards/magiclick-2p4/config.h",
+      "main/boards/magiclick-2p5/config.h",
+      "main/boards/magiclick-2p5/power_manager.h",
+      "main/boards/magiclick-c3/config.h",
+      "main/boards/magiclick-c3-v2/config.h",
+      "main/boards/minsi-k08-dual/config.h",
+      "main/boards/minsi-k08-dual/power_manager.h",
+      "main/boards/mixgo-nova/config.h",
+      "main/boards/movecall-cuican-esp32s3/config.h",
+      "main/boards/movecall-moji-esp32s3/config.h",
+      "main/boards/movecall-moji2-esp32c5/config.h",
+      "main/boards/nulllab-ai-vox-v3/ai_vox3_audio_codec.h",
+      "main/boards/nulllab-ai-vox-v3/config.h",
+      "main/boards/nulllab-ai-vox-v3/power_manager.h",
+      "main/boards/otto-robot/config.h",
+      "main/boards/otto-robot/oscillator.h",
+      "main/boards/otto-robot/otto_emoji_display.h",
+      "main/boards/otto-robot/otto_movements.h",
+      "main/boards/otto-robot/power_manager.h",
+      "main/boards/otto-robot/websocket_control_server.h",
+      "main/boards/rymcu/bigsmart/config.h",
+      "main/boards/sensecap-watcher/config.h",
+      "main/boards/sensecap-watcher/sensecap_audio_codec.h",
+      "main/boards/sensecap-watcher/sscma_camera.h",
+      "main/boards/sp-esp32-s3-1.28-box/config.h",
+      "main/boards/sp-esp32-s3-1.28-box/power_manager.h",
+      "main/boards/sp-esp32-s3-1.54-muma/config.h",
+      "main/boards/sp-esp32-s3-1.54-muma/power_manager.h",
+      "main/boards/surfer-c3-1.14tft/config.h",
+      "main/boards/surfer-c3-1.14tft/power_manager.h",
+      "main/boards/taiji-pi-s3/config.h",
+      "main/boards/tudouzi/config.h",
+      "main/boards/waveshare/esp32-c6-lcd-1.69/config.h",
+      "main/boards/waveshare/esp32-c6-lcd-1.69/power_manager.h",
+      "main/boards/waveshare/esp32-c6-touch-amoled-1.32/config.h",
+      "main/boards/waveshare/esp32-c6-touch-amoled-1.43/config.h",
+      "main/boards/waveshare/esp32-c6-touch-amoled-1.8/config.h",
+      "main/boards/waveshare/esp32-c6-touch-amoled-2.06/config.h",
+      "main/boards/waveshare/esp32-c6-touch-amoled-2.16/config.h",
+      "main/boards/waveshare/esp32-c6-touch-lcd-1.83/config.h",
+      "main/boards/waveshare/esp32-p4-nano/config.h",
+      "main/boards/waveshare/esp32-p4-nano/lcd_init_cmds.h",
+      "main/boards/waveshare/esp32-p4-wifi6-touch-lcd/config.h",
+      "main/boards/waveshare/esp32-p4-wifi6-touch-lcd/lcd_init_cmds.h",
+      "main/boards/waveshare/esp32-p4-wifi6-touch-lcd-3.5/config.h",
+      "main/boards/waveshare/esp32-s3-audio-board/config.h",
+      "main/boards/waveshare/esp32-s3-audio-board/esp_lcd_jd9853.h",
+      "main/boards/waveshare/esp32-s3-cam/config.h",
+      "main/boards/waveshare/esp32-s3-epaper-1.54/board_power_bsp.h",
+      "main/boards/waveshare/esp32-s3-epaper-1.54/config.h",
+      "main/boards/waveshare/esp32-s3-epaper-1.54/custom_lcd_display.h",
+      "main/boards/waveshare/esp32-s3-epaper-3.97/config.h",
+      "main/boards/waveshare/esp32-s3-epaper-3.97/custom_lcd_display.h",
+      "main/boards/waveshare/esp32-s3-lcd-0.85/config.h",
+      "main/boards/waveshare/esp32-s3-lcd-0.85/led_strip_control.h",
+      "main/boards/waveshare/esp32-s3-lcd-0.85/power_manager.h",
+      "main/boards/waveshare/esp32-s3-rlcd-4.2/config.h",
+      "main/boards/waveshare/esp32-s3-rlcd-4.2/custom_lcd_display.h",
+      "main/boards/waveshare/esp32-s3-touch-amoled-1.32/config.h",
+      "main/boards/waveshare/esp32-s3-touch-amoled-1.43c/config.h",
+      "main/boards/waveshare/esp32-s3-touch-amoled-1.75/config.h",
+      "main/boards/waveshare/esp32-s3-touch-amoled-1.8/config.h",
+      "main/boards/waveshare/esp32-s3-touch-amoled-2.06/config.h",
+      "main/boards/waveshare/esp32-s3-touch-amoled-2.16/config.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.46/config.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.54/config.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.54/power_manager.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.83/config.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.85/config.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-1.85c/config.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-3.49/config.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-3.49/custom_lcd_display.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-3.5/config.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-3.5b/config.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-3.5b/custom_lcd_display.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-4.3c/config.h",
+      "main/boards/waveshare/esp32-s3-touch-lcd-4b/config.h",
+      "main/boards/waveshare/esp32-touch-lcd-3.5/config.h",
+      "main/boards/wireless-tag-wtp4c5mp07s/config.h",
+      "main/boards/xingzhi-abs-2.0/config.h",
+      "main/boards/xingzhi-abs-2.0/customlcddisplay.h",
+      "main/boards/xingzhi-abs-2.0/power_manager.h",
+      "main/boards/xingzhi-cube-0.85tft-ml307/config.h",
+      "main/boards/xingzhi-cube-0.85tft-wifi/config.h",
+      "main/boards/xingzhi-cube-0.96oled-ml307/config.h",
+      "main/boards/xingzhi-cube-0.96oled-wifi/config.h",
+      "main/boards/xingzhi-cube-1.54tft-ml307/config.h",
+      "main/boards/xingzhi-cube-1.54tft-wifi/config.h",
+      "main/boards/xingzhi-cube-1.54tft-wifi/power_manager.h",
+      "main/boards/xingzhi-metal-1.54-wifi/config.h",
+      "main/boards/xingzhi-metal-1.54-wifi/cst816x.h",
+      "main/boards/xingzhi-metal-1.54-wifi/power_manager.h",
+      "main/boards/xmini-c3/config.h",
+      "main/boards/xmini-c3-4g/config.h",
+      "main/boards/xmini-c3-v3/config.h",
+      "main/boards/yunliao-s3/config.h",
+      "main/boards/yunliao-s3/power_manager.h",
+      "main/boards/zhengchen-1.54tft-ml307/config.h",
+      "main/boards/zhengchen-1.54tft-wifi/config.h",
+      "main/boards/zhengchen-1.54tft-wifi/power_manager.h",
+      "main/boards/zhengchen-1.54tft-wifi/zhengchen_lcd_display.h",
+      "main/boards/zhengchen-cam/config.h",
+      "main/boards/zhengchen-cam/power_manager.h",
+      "main/boards/zhengchen-cam-ml307/config.h",
+      "main/boards/zhengchen-cam-ml307/power_manager.h",
+      "main/device_state.h",
+      "main/device_state_machine.h",
+      "main/display/display.h",
+      "main/display/emote_display.h",
+      "main/display/lcd_display.h",
+      "main/display/lvgl_display/emoji_collection.h",
+      "main/display/lvgl_display/gif/gifdec.h",
+      "main/display/lvgl_display/gif/gifdec_mve.h",
+      "main/display/lvgl_display/gif/lvgl_gif.h",
+      "main/display/lvgl_display/jpg/image_to_jpeg.h",
+      "main/display/lvgl_display/jpg/jpeg_to_image.h",
+      "main/display/lvgl_display/lvgl_display.h",
+      "main/display/lvgl_display/lvgl_font.h",
+      "main/display/lvgl_display/lvgl_image.h",
+      "main/display/lvgl_display/lvgl_theme.h",
+      "main/display/oled_display.h",
+      "main/led/circular_strip.h",
+      "main/led/gpio_led.h",
+      "main/led/led.h",
+      "main/led/single_led.h",
+      "main/mcp_server.h",
+      "main/ota.h",
+      "main/protocols/mqtt_protocol.h",
+      "main/protocols/protocol.h",
+      "main/protocols/websocket_protocol.h",
+      "main/settings.h",
+      "main/system_info.h"
+    ]
+  },
+  "boards": {
+    "count": 99,
+    "items": [
+      {
+        "board": "aipi-lite",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/aipi-lite/aipi-lite.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/aipi-lite/config.h",
+          "main/boards/aipi-lite/power_manager.h"
+        ]
+      },
+      {
+        "board": "atk-dnesp32s3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/atk-dnesp32s3/atk_dnesp32s3.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atk-dnesp32s3/config.h"
+        ]
+      },
+      {
+        "board": "atk-dnesp32s3-box",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/atk-dnesp32s3-box/atk_dnesp32s3_box.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atk-dnesp32s3-box/config.h"
+        ]
+      },
+      {
+        "board": "atk-dnesp32s3-box0",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/atk-dnesp32s3-box0/atk_dnesp32s3_box0.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atk-dnesp32s3-box0/config.h",
+          "main/boards/atk-dnesp32s3-box0/power_manager.h"
+        ]
+      },
+      {
+        "board": "atk-dnesp32s3-box2-4g",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/atk-dnesp32s3-box2-4g/atk_dnesp32s3_box2.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atk-dnesp32s3-box2-4g/config.h",
+          "main/boards/atk-dnesp32s3-box2-4g/power_manager.h"
+        ]
+      },
+      {
+        "board": "atk-dnesp32s3-box2-wifi",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/atk-dnesp32s3-box2-wifi/atk_dnesp32s3_box2.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atk-dnesp32s3-box2-wifi/config.h",
+          "main/boards/atk-dnesp32s3-box2-wifi/power_manager.h"
+        ]
+      },
+      {
+        "board": "atk-dnesp32s3-box3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/atk-dnesp32s3-box3/atk_dnesp32s3_box3.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atk-dnesp32s3-box3/config.h",
+          "main/boards/atk-dnesp32s3-box3/power_manager.h"
+        ]
+      },
+      {
+        "board": "atk-dnesp32s3m-4g",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/atk-dnesp32s3m-4g/atk_dnesp32s3m.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atk-dnesp32s3m-4g/config.h"
+        ]
+      },
+      {
+        "board": "atk-dnesp32s3m-wifi",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/atk-dnesp32s3m-wifi/atk_dnesp32s3m.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atk-dnesp32s3m-wifi/config.h"
+        ]
+      },
+      {
+        "board": "atom-echos3r",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/atom-echos3r/atom_echos3r.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atom-echos3r/config.h"
+        ]
+      },
+      {
+        "board": "atommatrix-echo-base",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/atommatrix-echo-base/atommatrix_echo_base.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atommatrix-echo-base/config.h"
+        ]
+      },
+      {
+        "board": "atoms3-echo-base",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/atoms3-echo-base/atoms3_echo_base.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atoms3-echo-base/config.h"
+        ]
+      },
+      {
+        "board": "atoms3r-cam-m12-echo-base",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/atoms3r-cam-m12-echo-base/atoms3r_cam_m12_echo_base.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atoms3r-cam-m12-echo-base/config.h"
+        ]
+      },
+      {
+        "board": "atoms3r-echo-base",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/atoms3r-echo-base/atoms3r_echo_base.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atoms3r-echo-base/config.h"
+        ]
+      },
+      {
+        "board": "atoms3r-echo-pyramid",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/atoms3r-echo-pyramid/atoms3r_echo_pyramid.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/atoms3r-echo-pyramid/config.h"
+        ]
+      },
+      {
+        "board": "bread-compact-esp32",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/bread-compact-esp32/esp32_bread_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/bread-compact-esp32/config.h"
+        ]
+      },
+      {
+        "board": "bread-compact-esp32-lcd",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/bread-compact-esp32-lcd/esp32_bread_board_lcd.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/bread-compact-esp32-lcd/config.h"
+        ]
+      },
+      {
+        "board": "bread-compact-ml307",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/bread-compact-ml307/compact_ml307_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/bread-compact-ml307/config.h"
+        ]
+      },
+      {
+        "board": "bread-compact-nt26",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/bread-compact-nt26/compact_nt26_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/bread-compact-nt26/config.h"
+        ]
+      },
+      {
+        "board": "bread-compact-wifi",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/bread-compact-wifi/compact_wifi_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/bread-compact-wifi/config.h"
+        ]
+      },
+      {
+        "board": "bread-compact-wifi-lcd",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/bread-compact-wifi-lcd/compact_wifi_board_lcd.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/bread-compact-wifi-lcd/config.h"
+        ]
+      },
+      {
+        "board": "bread-compact-wifi-s3cam",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/bread-compact-wifi-s3cam/compact_wifi_board_s3cam.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/bread-compact-wifi-s3cam/config.h"
+        ]
+      },
+      {
+        "board": "df-k10",
+        "cc_count": 3,
+        "c_count": 0,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/df-k10/df_k10_board.cc",
+          "main/boards/df-k10/k10_audio_codec.cc",
+          "main/boards/df-k10/led_control.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/df-k10/config.h",
+          "main/boards/df-k10/k10_audio_codec.h",
+          "main/boards/df-k10/led_control.h"
+        ]
+      },
+      {
+        "board": "df-s3-ai-cam",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/df-s3-ai-cam/df_s3_ai_cam.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/df-s3-ai-cam/config.h"
+        ]
+      },
+      {
+        "board": "doit-s3-aibox",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/doit-s3-aibox/doit_s3_aibox.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/doit-s3-aibox/config.h"
+        ]
+      },
+      {
+        "board": "du-chatx",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/du-chatx/du-chatx-wifi.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/du-chatx/config.h",
+          "main/boards/du-chatx/power_manager.h"
+        ]
+      },
+      {
+        "board": "electron-bot",
+        "cc_count": 5,
+        "c_count": 1,
+        "h_count": 5,
+        "cc_files": [
+          "main/boards/electron-bot/electron_bot.cc",
+          "main/boards/electron-bot/electron_bot_controller.cc",
+          "main/boards/electron-bot/electron_emoji_display.cc",
+          "main/boards/electron-bot/movements.cc",
+          "main/boards/electron-bot/oscillator.cc"
+        ],
+        "c_files": [
+          "main/boards/electron-bot/otto_icon_font.c"
+        ],
+        "h_files": [
+          "main/boards/electron-bot/config.h",
+          "main/boards/electron-bot/electron_emoji_display.h",
+          "main/boards/electron-bot/movements.h",
+          "main/boards/electron-bot/oscillator.h",
+          "main/boards/electron-bot/power_manager.h"
+        ]
+      },
+      {
+        "board": "esp-box",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/esp-box/esp_box_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp-box/config.h"
+        ]
+      },
+      {
+        "board": "esp-box-3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/esp-box-3/esp_box3_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp-box-3/config.h"
+        ]
+      },
+      {
+        "board": "esp-box-lite",
+        "cc_count": 2,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/esp-box-lite/box_audio_codec_lite.cc",
+          "main/boards/esp-box-lite/esp_box_lite_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp-box-lite/box_audio_codec_lite.h",
+          "main/boards/esp-box-lite/config.h"
+        ]
+      },
+      {
+        "board": "esp-hi",
+        "cc_count": 3,
+        "c_count": 0,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/esp-hi/adc_pdm_audio_codec.cc",
+          "main/boards/esp-hi/emoji_display.cc",
+          "main/boards/esp-hi/esp_hi.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp-hi/adc_pdm_audio_codec.h",
+          "main/boards/esp-hi/config.h",
+          "main/boards/esp-hi/emoji_display.h"
+        ]
+      },
+      {
+        "board": "esp-p4-function-ev-board",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/esp-p4-function-ev-board/esp-p4-function-ev-board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp-p4-function-ev-board/config.h"
+        ]
+      },
+      {
+        "board": "esp-s3-lcd-ev-board",
+        "cc_count": 1,
+        "c_count": 2,
+        "h_count": 4,
+        "cc_files": [
+          "main/boards/esp-s3-lcd-ev-board/esp-s3-lcd-ev-board.cc"
+        ],
+        "c_files": [
+          "main/boards/esp-s3-lcd-ev-board/esp_io_expander_tca9554.c",
+          "main/boards/esp-s3-lcd-ev-board/esp_lcd_gc9503.c"
+        ],
+        "h_files": [
+          "main/boards/esp-s3-lcd-ev-board/config.h",
+          "main/boards/esp-s3-lcd-ev-board/esp_io_expander_tca9554.h",
+          "main/boards/esp-s3-lcd-ev-board/esp_lcd_gc9503.h",
+          "main/boards/esp-s3-lcd-ev-board/pin_config.h"
+        ]
+      },
+      {
+        "board": "esp-s3-lcd-ev-board-2",
+        "cc_count": 1,
+        "c_count": 1,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/esp-s3-lcd-ev-board-2/esp-s3-lcd-ev-board-2.cc"
+        ],
+        "c_files": [
+          "main/boards/esp-s3-lcd-ev-board-2/esp_lcd_gc9503.c"
+        ],
+        "h_files": [
+          "main/boards/esp-s3-lcd-ev-board-2/config.h",
+          "main/boards/esp-s3-lcd-ev-board-2/esp_lcd_gc9503.h",
+          "main/boards/esp-s3-lcd-ev-board-2/pin_config.h"
+        ]
+      },
+      {
+        "board": "esp-sensairshuttle",
+        "cc_count": 2,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/esp-sensairshuttle/adc_pdm_audio_codec.cc",
+          "main/boards/esp-sensairshuttle/esp-sensairshuttle.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp-sensairshuttle/adc_pdm_audio_codec.h",
+          "main/boards/esp-sensairshuttle/config.h"
+        ]
+      },
+      {
+        "board": "esp-sparkbot",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/esp-sparkbot/esp_sparkbot_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp-sparkbot/config.h"
+        ]
+      },
+      {
+        "board": "esp-spot",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/esp-spot/esp_spot_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp-spot/config.h"
+        ]
+      },
+      {
+        "board": "esp-vocat",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/esp-vocat/esp_vocat.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp-vocat/config.h",
+          "main/boards/esp-vocat/touch.h"
+        ]
+      },
+      {
+        "board": "esp32-cgc",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/esp32-cgc/esp32_cgc_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp32-cgc/config.h"
+        ]
+      },
+      {
+        "board": "esp32-cgc-144",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/esp32-cgc-144/esp32_cgc_144_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp32-cgc-144/config.h",
+          "main/boards/esp32-cgc-144/power_manager.h",
+          "main/boards/esp32-cgc-144/power_manager_lite.h"
+        ]
+      },
+      {
+        "board": "esp32s3-korvo2-v3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/esp32s3-korvo2-v3/esp32s3_korvo2_v3_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp32s3-korvo2-v3/config.h",
+          "main/boards/esp32s3-korvo2-v3/power_manager.h"
+        ]
+      },
+      {
+        "board": "esp32s3-korvo2-v3-rndis",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/esp32s3-korvo2-v3-rndis/esp32s3_korvo2_v3_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/esp32s3-korvo2-v3-rndis/config.h",
+          "main/boards/esp32s3-korvo2-v3-rndis/power_manager.h"
+        ]
+      },
+      {
+        "board": "freenove-esp32s3-display-2.8-lcd",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/freenove-esp32s3-display-2.8-lcd/freenove-esp32s3-display-2.8-lcd.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/freenove-esp32s3-display-2.8-lcd/config.h"
+        ]
+      },
+      {
+        "board": "genjutech-s3-1.54tft",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/genjutech-s3-1.54tft/genjutech-s3-1.54tft.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/genjutech-s3-1.54tft/config.h",
+          "main/boards/genjutech-s3-1.54tft/power_manager.h"
+        ]
+      },
+      {
+        "board": "hu-087",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/hu-087/hu_087_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/hu-087/config.h"
+        ]
+      },
+      {
+        "board": "jiuchuan-s3",
+        "cc_count": 1,
+        "c_count": 1,
+        "h_count": 5,
+        "cc_files": [
+          "main/boards/jiuchuan-s3/jiuchuan_dev_board.cc"
+        ],
+        "c_files": [
+          "main/boards/jiuchuan-s3/esp_lcd_panel_gc9301.c"
+        ],
+        "h_files": [
+          "main/boards/jiuchuan-s3/config.h",
+          "main/boards/jiuchuan-s3/esp_lcd_panel_gc9301.h",
+          "main/boards/jiuchuan-s3/gpio_manager.h",
+          "main/boards/jiuchuan-s3/power_controller.h",
+          "main/boards/jiuchuan-s3/power_manager.h"
+        ]
+      },
+      {
+        "board": "kevin-box-2",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/kevin-box-2/kevin_box_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/kevin-box-2/config.h"
+        ]
+      },
+      {
+        "board": "kevin-c3",
+        "cc_count": 2,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/kevin-c3/kevin_c3_board.cc",
+          "main/boards/kevin-c3/led_strip_control.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/kevin-c3/config.h",
+          "main/boards/kevin-c3/led_strip_control.h"
+        ]
+      },
+      {
+        "board": "kevin-sp-v3-dev",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/kevin-sp-v3-dev/kevin-sp-v3_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/kevin-sp-v3-dev/config.h"
+        ]
+      },
+      {
+        "board": "kevin-sp-v4-dev",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/kevin-sp-v4-dev/kevin-sp-v4_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/kevin-sp-v4-dev/config.h"
+        ]
+      },
+      {
+        "board": "kevin-yuying-313lcd",
+        "cc_count": 1,
+        "c_count": 1,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/kevin-yuying-313lcd/kevin_yuying_313lcd.cc"
+        ],
+        "c_files": [
+          "main/boards/kevin-yuying-313lcd/esp_lcd_gc9503.c"
+        ],
+        "h_files": [
+          "main/boards/kevin-yuying-313lcd/config.h",
+          "main/boards/kevin-yuying-313lcd/esp_lcd_gc9503.h",
+          "main/boards/kevin-yuying-313lcd/pin_config.h"
+        ]
+      },
+      {
+        "board": "labplus-ledong-v2",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/labplus-ledong-v2/labplus_ledong_v2.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/labplus-ledong-v2/config.h"
+        ]
+      },
+      {
+        "board": "labplus-mpython-v3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/labplus-mpython-v3/mpython_pro.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/labplus-mpython-v3/config.h"
+        ]
+      },
+      {
+        "board": "lceda-course-examples",
+        "cc_count": 9,
+        "c_count": 0,
+        "h_count": 7,
+        "cc_files": [
+          "main/boards/lceda-course-examples/eda-robot-pro/eda_dog_controller.cc",
+          "main/boards/lceda-course-examples/eda-robot-pro/eda_dog_movements.cc",
+          "main/boards/lceda-course-examples/eda-robot-pro/eda_robot_pro.cc",
+          "main/boards/lceda-course-examples/eda-robot-pro/oscillator.cc",
+          "main/boards/lceda-course-examples/eda-super-bear/eda_super_bear.cc",
+          "main/boards/lceda-course-examples/eda-super-bear/eda_super_bear_controller.cc",
+          "main/boards/lceda-course-examples/eda-super-bear/eda_super_bear_movements.cc",
+          "main/boards/lceda-course-examples/eda-super-bear/oscillator.cc",
+          "main/boards/lceda-course-examples/eda-tv-pro/eda-tv-pro.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/lceda-course-examples/eda-robot-pro/config.h",
+          "main/boards/lceda-course-examples/eda-robot-pro/eda_dog_movements.h",
+          "main/boards/lceda-course-examples/eda-robot-pro/oscillator.h",
+          "main/boards/lceda-course-examples/eda-super-bear/config.h",
+          "main/boards/lceda-course-examples/eda-super-bear/eda_super_bear_movements.h",
+          "main/boards/lceda-course-examples/eda-super-bear/oscillator.h",
+          "main/boards/lceda-course-examples/eda-tv-pro/config.h"
+        ]
+      },
+      {
+        "board": "lichuang-c3-dev",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/lichuang-c3-dev/lichuang_c3_dev_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/lichuang-c3-dev/config.h"
+        ]
+      },
+      {
+        "board": "lichuang-dev",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/lichuang-dev/lichuang_dev_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/lichuang-dev/config.h"
+        ]
+      },
+      {
+        "board": "lilygo-t-cameraplus-s3",
+        "cc_count": 2,
+        "c_count": 0,
+        "h_count": 4,
+        "cc_files": [
+          "main/boards/lilygo-t-cameraplus-s3/lilygo-t-cameraplus-s3.cc",
+          "main/boards/lilygo-t-cameraplus-s3/tcamerapluss3_audio_codec.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/lilygo-t-cameraplus-s3/config.h",
+          "main/boards/lilygo-t-cameraplus-s3/ir_filter_controller.h",
+          "main/boards/lilygo-t-cameraplus-s3/pin_config.h",
+          "main/boards/lilygo-t-cameraplus-s3/tcamerapluss3_audio_codec.h"
+        ]
+      },
+      {
+        "board": "lilygo-t-circle-s3",
+        "cc_count": 2,
+        "c_count": 1,
+        "h_count": 4,
+        "cc_files": [
+          "main/boards/lilygo-t-circle-s3/lilygo-t-circle-s3.cc",
+          "main/boards/lilygo-t-circle-s3/tcircles3_audio_codec.cc"
+        ],
+        "c_files": [
+          "main/boards/lilygo-t-circle-s3/esp_lcd_gc9d01n.c"
+        ],
+        "h_files": [
+          "main/boards/lilygo-t-circle-s3/config.h",
+          "main/boards/lilygo-t-circle-s3/esp_lcd_gc9d01n.h",
+          "main/boards/lilygo-t-circle-s3/pin_config.h",
+          "main/boards/lilygo-t-circle-s3/tcircles3_audio_codec.h"
+        ]
+      },
+      {
+        "board": "lilygo-t-display-p4",
+        "cc_count": 3,
+        "c_count": 0,
+        "h_count": 4,
+        "cc_files": [
+          "main/boards/lilygo-t-display-p4/hi8561_driver.cc",
+          "main/boards/lilygo-t-display-p4/lilygo-t-display-p4.cc",
+          "main/boards/lilygo-t-display-p4/rm69a10_driver.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/lilygo-t-display-p4/config.h",
+          "main/boards/lilygo-t-display-p4/hi8561_driver.h",
+          "main/boards/lilygo-t-display-p4/rm69a10_driver.h",
+          "main/boards/lilygo-t-display-p4/t_display_p4_config.h"
+        ]
+      },
+      {
+        "board": "lilygo-t-display-s3-pro-mvsrlora",
+        "cc_count": 2,
+        "c_count": 0,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/lilygo-t-display-s3-pro-mvsrlora/lilygo-t-display-s3-pro-mvsrlora.cc",
+          "main/boards/lilygo-t-display-s3-pro-mvsrlora/tdisplays3promvsrlora_audio_codec.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/lilygo-t-display-s3-pro-mvsrlora/config.h",
+          "main/boards/lilygo-t-display-s3-pro-mvsrlora/pin_config.h",
+          "main/boards/lilygo-t-display-s3-pro-mvsrlora/tdisplays3promvsrlora_audio_codec.h"
+        ]
+      },
+      {
+        "board": "m5stack-cardputer-adv",
+        "cc_count": 3,
+        "c_count": 0,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/m5stack-cardputer-adv/m5stack_cardputer_adv.cc",
+          "main/boards/m5stack-cardputer-adv/tca8418_keyboard.cc",
+          "main/boards/m5stack-cardputer-adv/wifi_config_ui.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/m5stack-cardputer-adv/config.h",
+          "main/boards/m5stack-cardputer-adv/tca8418_keyboard.h",
+          "main/boards/m5stack-cardputer-adv/wifi_config_ui.h"
+        ]
+      },
+      {
+        "board": "m5stack-core-s3",
+        "cc_count": 2,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/m5stack-core-s3/cores3_audio_codec.cc",
+          "main/boards/m5stack-core-s3/m5stack_core_s3.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/m5stack-core-s3/config.h",
+          "main/boards/m5stack-core-s3/cores3_audio_codec.h"
+        ]
+      },
+      {
+        "board": "m5stack-tab5",
+        "cc_count": 2,
+        "c_count": 1,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/m5stack-tab5/m5stack_tab5.cc",
+          "main/boards/m5stack-tab5/tab5_audio_codec.cc"
+        ],
+        "c_files": [
+          "main/boards/m5stack-tab5/esp_lcd_st7123.c"
+        ],
+        "h_files": [
+          "main/boards/m5stack-tab5/config.h",
+          "main/boards/m5stack-tab5/esp_lcd_st7123.h",
+          "main/boards/m5stack-tab5/tab5_audio_codec.h"
+        ]
+      },
+      {
+        "board": "magiclick-2p4",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/magiclick-2p4/magiclick_2p4_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/magiclick-2p4/config.h"
+        ]
+      },
+      {
+        "board": "magiclick-2p5",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/magiclick-2p5/magiclick_2p5_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/magiclick-2p5/config.h",
+          "main/boards/magiclick-2p5/power_manager.h"
+        ]
+      },
+      {
+        "board": "magiclick-c3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/magiclick-c3/magiclick_c3_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/magiclick-c3/config.h"
+        ]
+      },
+      {
+        "board": "magiclick-c3-v2",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/magiclick-c3-v2/magiclick_c3_v2_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/magiclick-c3-v2/config.h"
+        ]
+      },
+      {
+        "board": "minsi-k08-dual",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/minsi-k08-dual/minsi_k08_dual.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/minsi-k08-dual/config.h",
+          "main/boards/minsi-k08-dual/power_manager.h"
+        ]
+      },
+      {
+        "board": "mixgo-nova",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/mixgo-nova/mixgo-nova.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/mixgo-nova/config.h"
+        ]
+      },
+      {
+        "board": "movecall-cuican-esp32s3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/movecall-cuican-esp32s3/movecall_cuican_esp32s3.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/movecall-cuican-esp32s3/config.h"
+        ]
+      },
+      {
+        "board": "movecall-moji-esp32s3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/movecall-moji-esp32s3/movecall_moji_esp32s3.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/movecall-moji-esp32s3/config.h"
+        ]
+      },
+      {
+        "board": "movecall-moji2-esp32c5",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/movecall-moji2-esp32c5/movecall_moji2_esp32s3.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/movecall-moji2-esp32c5/config.h"
+        ]
+      },
+      {
+        "board": "nulllab-ai-vox-v3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/nulllab-ai-vox-v3/ai_vox3_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/nulllab-ai-vox-v3/ai_vox3_audio_codec.h",
+          "main/boards/nulllab-ai-vox-v3/config.h",
+          "main/boards/nulllab-ai-vox-v3/power_manager.h"
+        ]
+      },
+      {
+        "board": "otto-robot",
+        "cc_count": 6,
+        "c_count": 1,
+        "h_count": 6,
+        "cc_files": [
+          "main/boards/otto-robot/oscillator.cc",
+          "main/boards/otto-robot/otto_controller.cc",
+          "main/boards/otto-robot/otto_emoji_display.cc",
+          "main/boards/otto-robot/otto_movements.cc",
+          "main/boards/otto-robot/otto_robot.cc",
+          "main/boards/otto-robot/websocket_control_server.cc"
+        ],
+        "c_files": [
+          "main/boards/otto-robot/otto_icon_font.c"
+        ],
+        "h_files": [
+          "main/boards/otto-robot/config.h",
+          "main/boards/otto-robot/oscillator.h",
+          "main/boards/otto-robot/otto_emoji_display.h",
+          "main/boards/otto-robot/otto_movements.h",
+          "main/boards/otto-robot/power_manager.h",
+          "main/boards/otto-robot/websocket_control_server.h"
+        ]
+      },
+      {
+        "board": "rymcu",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/rymcu/bigsmart/rymcu_bigsmart_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/rymcu/bigsmart/config.h"
+        ]
+      },
+      {
+        "board": "sensecap-watcher",
+        "cc_count": 3,
+        "c_count": 0,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/sensecap-watcher/sensecap_audio_codec.cc",
+          "main/boards/sensecap-watcher/sensecap_watcher.cc",
+          "main/boards/sensecap-watcher/sscma_camera.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/sensecap-watcher/config.h",
+          "main/boards/sensecap-watcher/sensecap_audio_codec.h",
+          "main/boards/sensecap-watcher/sscma_camera.h"
+        ]
+      },
+      {
+        "board": "sp-esp32-s3-1.28-box",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/sp-esp32-s3-1.28-box/sp-esp32-s3-1.28-box.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/sp-esp32-s3-1.28-box/config.h",
+          "main/boards/sp-esp32-s3-1.28-box/power_manager.h"
+        ]
+      },
+      {
+        "board": "sp-esp32-s3-1.54-muma",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/sp-esp32-s3-1.54-muma/sp-esp32-s3-1.54-muma.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/sp-esp32-s3-1.54-muma/config.h",
+          "main/boards/sp-esp32-s3-1.54-muma/power_manager.h"
+        ]
+      },
+      {
+        "board": "surfer-c3-1.14tft",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/surfer-c3-1.14tft/surfer-c3-1.14tft.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/surfer-c3-1.14tft/config.h",
+          "main/boards/surfer-c3-1.14tft/power_manager.h"
+        ]
+      },
+      {
+        "board": "taiji-pi-s3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/taiji-pi-s3/taiji_pi_s3.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/taiji-pi-s3/config.h"
+        ]
+      },
+      {
+        "board": "tudouzi",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/tudouzi/kevin_box_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/tudouzi/config.h"
+        ]
+      },
+      {
+        "board": "waveshare",
+        "cc_count": 40,
+        "c_count": 1,
+        "h_count": 46,
+        "cc_files": [
+          "main/boards/waveshare/esp32-c6-lcd-1.69/esp32-c6-lcd-1.69.cc",
+          "main/boards/waveshare/esp32-c6-touch-amoled-1.32/esp32-c6-touch-amoled-1.32.cc",
+          "main/boards/waveshare/esp32-c6-touch-amoled-1.43/esp32-c6-touch-amoled-1.43.cc",
+          "main/boards/waveshare/esp32-c6-touch-amoled-1.8/esp32-c6-touch-amoled-1.8.cc",
+          "main/boards/waveshare/esp32-c6-touch-amoled-2.06/esp32-c6-touch-amoled-2.06.cc",
+          "main/boards/waveshare/esp32-c6-touch-amoled-2.16/esp32-c6-touch-amoled-2.16.cc",
+          "main/boards/waveshare/esp32-c6-touch-lcd-1.83/esp32-c6-touch-lcd-1.83.cc",
+          "main/boards/waveshare/esp32-p4-nano/esp32-p4-nano.cc",
+          "main/boards/waveshare/esp32-p4-wifi6-touch-lcd/esp32-p4-wifi6-touch-lcd.cc",
+          "main/boards/waveshare/esp32-p4-wifi6-touch-lcd-3.5/esp32-p4-wifi6-touch-lcd-3.5.cc",
+          "main/boards/waveshare/esp32-s3-audio-board/esp32-s3-audio_board.cc",
+          "main/boards/waveshare/esp32-s3-cam/esp32-s3-cam-xxxx.cc",
+          "main/boards/waveshare/esp32-s3-epaper-1.54/board_power_bsp.cc",
+          "main/boards/waveshare/esp32-s3-epaper-1.54/custom_lcd_display.cc",
+          "main/boards/waveshare/esp32-s3-epaper-1.54/waveshare-s3-epaper-1.54.cc",
+          "main/boards/waveshare/esp32-s3-epaper-3.97/custom_lcd_display.cc",
+          "main/boards/waveshare/esp32-s3-epaper-3.97/waveshare-s3-epaper-3.97.cc",
+          "main/boards/waveshare/esp32-s3-lcd-0.85/esp32-s3-lcd-0.85.cc",
+          "main/boards/waveshare/esp32-s3-lcd-0.85/led_strip_control.cc",
+          "main/boards/waveshare/esp32-s3-rlcd-4.2/custom_lcd_display.cc",
+          "main/boards/waveshare/esp32-s3-rlcd-4.2/waveshare-s3-rlcd-4.2.cc",
+          "main/boards/waveshare/esp32-s3-touch-amoled-1.32/esp32-s3-touch-amoled-1.32.cc",
+          "main/boards/waveshare/esp32-s3-touch-amoled-1.43c/esp32-s3-touch-amoled-1.43c.cc",
+          "main/boards/waveshare/esp32-s3-touch-amoled-1.75/esp32-s3-touch-amoled-1.75.cc",
+          "main/boards/waveshare/esp32-s3-touch-amoled-1.8/esp32-s3-touch-amoled-1.8.cc",
+          "main/boards/waveshare/esp32-s3-touch-amoled-2.06/esp32-s3-touch-amoled-2.06.cc",
+          "main/boards/waveshare/esp32-s3-touch-amoled-2.16/esp32-s3-touch-amoled-2.16.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.46/esp32-s3-touch-lcd-1.46.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.54/esp32-s3-touch-lcd-1.54.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.83/esp32-s3-touch-lcd-1.83.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.85/esp32-s3-touch-lcd-1.85.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.85c/esp32-s3-touch-lcd-1.85c.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-3.49/custom_lcd_display.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-3.49/waveshare-s3-touch-lcd-3.49.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-3.5/esp32-s3-touch-lcd-3.5.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-3.5b/custom_lcd_display.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-3.5b/waveshare-s3-touch-lcd-3.5b.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-4.3c/esp32_s3_touch_lcd_4.3c.cc",
+          "main/boards/waveshare/esp32-s3-touch-lcd-4b/esp32-s3-touch-lcd-4b.cc",
+          "main/boards/waveshare/esp32-touch-lcd-3.5/esp32-touch-lcd-3.5.cc"
+        ],
+        "c_files": [
+          "main/boards/waveshare/esp32-s3-audio-board/esp_lcd_jd9853.c"
+        ],
+        "h_files": [
+          "main/boards/waveshare/esp32-c6-lcd-1.69/config.h",
+          "main/boards/waveshare/esp32-c6-lcd-1.69/power_manager.h",
+          "main/boards/waveshare/esp32-c6-touch-amoled-1.32/config.h",
+          "main/boards/waveshare/esp32-c6-touch-amoled-1.43/config.h",
+          "main/boards/waveshare/esp32-c6-touch-amoled-1.8/config.h",
+          "main/boards/waveshare/esp32-c6-touch-amoled-2.06/config.h",
+          "main/boards/waveshare/esp32-c6-touch-amoled-2.16/config.h",
+          "main/boards/waveshare/esp32-c6-touch-lcd-1.83/config.h",
+          "main/boards/waveshare/esp32-p4-nano/config.h",
+          "main/boards/waveshare/esp32-p4-nano/lcd_init_cmds.h",
+          "main/boards/waveshare/esp32-p4-wifi6-touch-lcd/config.h",
+          "main/boards/waveshare/esp32-p4-wifi6-touch-lcd/lcd_init_cmds.h",
+          "main/boards/waveshare/esp32-p4-wifi6-touch-lcd-3.5/config.h",
+          "main/boards/waveshare/esp32-s3-audio-board/config.h",
+          "main/boards/waveshare/esp32-s3-audio-board/esp_lcd_jd9853.h",
+          "main/boards/waveshare/esp32-s3-cam/config.h",
+          "main/boards/waveshare/esp32-s3-epaper-1.54/board_power_bsp.h",
+          "main/boards/waveshare/esp32-s3-epaper-1.54/config.h",
+          "main/boards/waveshare/esp32-s3-epaper-1.54/custom_lcd_display.h",
+          "main/boards/waveshare/esp32-s3-epaper-3.97/config.h",
+          "main/boards/waveshare/esp32-s3-epaper-3.97/custom_lcd_display.h",
+          "main/boards/waveshare/esp32-s3-lcd-0.85/config.h",
+          "main/boards/waveshare/esp32-s3-lcd-0.85/led_strip_control.h",
+          "main/boards/waveshare/esp32-s3-lcd-0.85/power_manager.h",
+          "main/boards/waveshare/esp32-s3-rlcd-4.2/config.h",
+          "main/boards/waveshare/esp32-s3-rlcd-4.2/custom_lcd_display.h",
+          "main/boards/waveshare/esp32-s3-touch-amoled-1.32/config.h",
+          "main/boards/waveshare/esp32-s3-touch-amoled-1.43c/config.h",
+          "main/boards/waveshare/esp32-s3-touch-amoled-1.75/config.h",
+          "main/boards/waveshare/esp32-s3-touch-amoled-1.8/config.h",
+          "main/boards/waveshare/esp32-s3-touch-amoled-2.06/config.h",
+          "main/boards/waveshare/esp32-s3-touch-amoled-2.16/config.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.46/config.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.54/config.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.54/power_manager.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.83/config.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.85/config.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-1.85c/config.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-3.49/config.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-3.49/custom_lcd_display.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-3.5/config.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-3.5b/config.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-3.5b/custom_lcd_display.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-4.3c/config.h",
+          "main/boards/waveshare/esp32-s3-touch-lcd-4b/config.h",
+          "main/boards/waveshare/esp32-touch-lcd-3.5/config.h"
+        ]
+      },
+      {
+        "board": "wireless-tag-wtp4c5mp07s",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/wireless-tag-wtp4c5mp07s/wireless-tag-wtp4c5mp07s.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/wireless-tag-wtp4c5mp07s/config.h"
+        ]
+      },
+      {
+        "board": "xingzhi-abs-2.0",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/xingzhi-abs-2.0/xingzhi-abs-2.0.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xingzhi-abs-2.0/config.h",
+          "main/boards/xingzhi-abs-2.0/customlcddisplay.h",
+          "main/boards/xingzhi-abs-2.0/power_manager.h"
+        ]
+      },
+      {
+        "board": "xingzhi-cube-0.85tft-ml307",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/xingzhi-cube-0.85tft-ml307/xingzhi-cube-0.85tft-ml307.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xingzhi-cube-0.85tft-ml307/config.h"
+        ]
+      },
+      {
+        "board": "xingzhi-cube-0.85tft-wifi",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/xingzhi-cube-0.85tft-wifi/xingzhi-cube-0.85tft-wifi.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xingzhi-cube-0.85tft-wifi/config.h"
+        ]
+      },
+      {
+        "board": "xingzhi-cube-0.96oled-ml307",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/xingzhi-cube-0.96oled-ml307/xingzhi-cube-0.96oled-ml307.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xingzhi-cube-0.96oled-ml307/config.h"
+        ]
+      },
+      {
+        "board": "xingzhi-cube-0.96oled-wifi",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/xingzhi-cube-0.96oled-wifi/xingzhi-cube-0.96oled-wifi.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xingzhi-cube-0.96oled-wifi/config.h"
+        ]
+      },
+      {
+        "board": "xingzhi-cube-1.54tft-ml307",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/xingzhi-cube-1.54tft-ml307/xingzhi-cube-1.54tft-ml307.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xingzhi-cube-1.54tft-ml307/config.h"
+        ]
+      },
+      {
+        "board": "xingzhi-cube-1.54tft-wifi",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/xingzhi-cube-1.54tft-wifi/xingzhi-cube-1.54tft-wifi.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xingzhi-cube-1.54tft-wifi/config.h",
+          "main/boards/xingzhi-cube-1.54tft-wifi/power_manager.h"
+        ]
+      },
+      {
+        "board": "xingzhi-metal-1.54-wifi",
+        "cc_count": 2,
+        "c_count": 0,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/xingzhi-metal-1.54-wifi/cst816x.cc",
+          "main/boards/xingzhi-metal-1.54-wifi/xingzhi-metal-1.54-wifi.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xingzhi-metal-1.54-wifi/config.h",
+          "main/boards/xingzhi-metal-1.54-wifi/cst816x.h",
+          "main/boards/xingzhi-metal-1.54-wifi/power_manager.h"
+        ]
+      },
+      {
+        "board": "xmini-c3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/xmini-c3/xmini_c3_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xmini-c3/config.h"
+        ]
+      },
+      {
+        "board": "xmini-c3-4g",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/xmini-c3-4g/xmini_c3_4g_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xmini-c3-4g/config.h"
+        ]
+      },
+      {
+        "board": "xmini-c3-v3",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/xmini-c3-v3/xmini_c3_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/xmini-c3-v3/config.h"
+        ]
+      },
+      {
+        "board": "yunliao-s3",
+        "cc_count": 2,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/yunliao-s3/power_manager.cc",
+          "main/boards/yunliao-s3/yunliao_s3.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/yunliao-s3/config.h",
+          "main/boards/yunliao-s3/power_manager.h"
+        ]
+      },
+      {
+        "board": "zhengchen-1.54tft-ml307",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 1,
+        "cc_files": [
+          "main/boards/zhengchen-1.54tft-ml307/zhengchen-1.54tft-ml307.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/zhengchen-1.54tft-ml307/config.h"
+        ]
+      },
+      {
+        "board": "zhengchen-1.54tft-wifi",
+        "cc_count": 1,
+        "c_count": 0,
+        "h_count": 3,
+        "cc_files": [
+          "main/boards/zhengchen-1.54tft-wifi/zhengchen-1.54tft-wifi.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/zhengchen-1.54tft-wifi/config.h",
+          "main/boards/zhengchen-1.54tft-wifi/power_manager.h",
+          "main/boards/zhengchen-1.54tft-wifi/zhengchen_lcd_display.h"
+        ]
+      },
+      {
+        "board": "zhengchen-cam",
+        "cc_count": 2,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/zhengchen-cam/mcp_controller.cc",
+          "main/boards/zhengchen-cam/zhengchen_cam_board.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/zhengchen-cam/config.h",
+          "main/boards/zhengchen-cam/power_manager.h"
+        ]
+      },
+      {
+        "board": "zhengchen-cam-ml307",
+        "cc_count": 2,
+        "c_count": 0,
+        "h_count": 2,
+        "cc_files": [
+          "main/boards/zhengchen-cam-ml307/mcp_controller.cc",
+          "main/boards/zhengchen-cam-ml307/zhengchen_cam_board_ml307.cc"
+        ],
+        "c_files": [],
+        "h_files": [
+          "main/boards/zhengchen-cam-ml307/config.h",
+          "main/boards/zhengchen-cam-ml307/power_manager.h"
+        ]
+      }
+    ]
+  }
+}

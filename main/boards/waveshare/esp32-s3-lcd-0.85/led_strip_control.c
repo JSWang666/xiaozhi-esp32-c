@@ -1,0 +1,1 @@
+/* LED strip MCP tools are handled in the main board file */
