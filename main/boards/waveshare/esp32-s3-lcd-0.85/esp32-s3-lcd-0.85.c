@@ -4,9 +4,11 @@
 #include "c_api/app_c_api.h"
 #include "c_api/codec_c_api.h"
 #include "c_api/display_c_api.h"
+#include "c_api/board_c_api.h"
 #include "backlight.h"
 #include "assets/lang_c.h"
 #include "device_state.h"
+#include "led/led.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -44,7 +46,12 @@ static void on_pwr_click(void *ud)
 {
     (void)ud;
     app_context_t *app = app_get_context();
-    if (app) app_toggle_chat(app);
+    if (!app) return;
+    if (app_get_device_state(app) == kDeviceStateStarting) {
+        board_enter_wifi_config_mode(board_get_instance());
+        return;
+    }
+    app_toggle_chat(app);
 }
 
 static void on_volume_up_click(void *ud)

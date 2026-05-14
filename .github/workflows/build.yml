@@ -8,6 +8,19 @@ on:
   pull_request:
     branches:
       - main
+  schedule:
+    # Weekly compile-only matrix (no release zips / artifacts)
+    - cron: "0 2 * * 0"
+  workflow_dispatch:
+    inputs:
+      skip_package:
+        description: "Compile only (pass --skip-package to release.py; skip merge-bin / zip / artifact upload)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: build-boards-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -20,7 +33,7 @@ jobs:
       variants: ${{ steps.select.outputs.variants }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -101,9 +114,17 @@ jobs:
         shell: bash
         run: |
           source $IDF_PATH/export.sh
-          python scripts/release.py ${{ matrix.board }} --name ${{ matrix.name }}
+          EXTRA=""
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            EXTRA="--skip-package"
+          fi
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.skip_package }}" = "true" ]; then
+            EXTRA="--skip-package"
+          fi
+          python scripts/release.py ${{ matrix.board }} --name ${{ matrix.name }} $EXTRA
 
       - name: Upload artifacts
+        if: ${{ github.event_name != 'schedule' && !(github.event_name == 'workflow_dispatch' && inputs.skip_package) }}
         uses: actions/upload-artifact@v4
         with:
           name: xiaozhi_${{ matrix.full_name }}_${{ github.sha }}

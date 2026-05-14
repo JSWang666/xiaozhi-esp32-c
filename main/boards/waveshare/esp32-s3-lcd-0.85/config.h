@@ -3,6 +3,8 @@
 
 #include <driver/gpio.h>
 #include <driver/spi_master.h>
+#include <es8311_codec.h>
+#include <es7210_adc.h>
 
 #define AUDIO_INPUT_SAMPLE_RATE 24000
 #define AUDIO_OUTPUT_SAMPLE_RATE 24000
