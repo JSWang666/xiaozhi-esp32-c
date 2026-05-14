@@ -15,6 +15,7 @@
 #include <esp_lcd_panel_io.h>
 #include <esp_lcd_panel_ops.h>
 #include "c_api/board_c_api.h"
+#include "backlight.h"
 
 #define TAG "ElectronBot"
 
@@ -125,6 +126,10 @@ static void *eb_get_backlight(board_desc_t *self)
 static void eb_destroy(board_desc_t *self)
 {
     electron_bot_ctx_t *ctx = (electron_bot_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     if (ctx->boot_button)
         board_btn_delete(ctx->boot_button);
     free(ctx);

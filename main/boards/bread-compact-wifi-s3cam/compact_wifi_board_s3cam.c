@@ -197,6 +197,10 @@ static void *s3cam_get_backlight(board_desc_t *self)
 static void s3cam_destroy(board_desc_t *self)
 {
     s3cam_ctx_t *ctx = (s3cam_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     free(ctx);
 }

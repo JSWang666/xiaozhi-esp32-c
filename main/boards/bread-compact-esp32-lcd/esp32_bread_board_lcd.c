@@ -234,6 +234,10 @@ static void *ebl_get_backlight(board_desc_t *self)
 static void ebl_destroy(board_desc_t *self)
 {
     esp32_bread_lcd_ctx_t *ctx = (esp32_bread_lcd_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     board_btn_delete(ctx->touch_button);
     board_btn_delete(ctx->asr_button);

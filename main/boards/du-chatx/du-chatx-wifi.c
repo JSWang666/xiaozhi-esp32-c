@@ -139,6 +139,10 @@ static void *duchatx_get_backlight(board_desc_t *self)
 static void duchatx_destroy(board_desc_t *self)
 {
     duchatx_ctx_t *ctx = (duchatx_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     free(ctx);
 }

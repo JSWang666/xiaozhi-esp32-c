@@ -125,6 +125,10 @@ static void *get_backlight(board_desc_t *self)
 static void destroy(board_desc_t *self)
 {
     p4_ev_ctx_t *ctx = (p4_ev_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     bsp_sdcard_unmount();
     free(ctx);

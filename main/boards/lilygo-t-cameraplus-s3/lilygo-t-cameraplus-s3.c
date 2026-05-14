@@ -298,6 +298,10 @@ static bool board_get_battery_level(board_desc_t *self, int *level,
 static void board_destroy(board_desc_t *self)
 {
     tcameraplus_ctx_t *ctx = (tcameraplus_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     board_btn_delete(ctx->key1_button);
     free(ctx);

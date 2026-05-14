@@ -32,6 +32,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "c_api/board_c_api.h"
+#include "backlight.h"
 
 #define TAG "OttoRobot"
 
@@ -286,6 +287,10 @@ static bool orb_get_battery_level(board_desc_t *self, int *level, bool *charging
 
 static void orb_destroy(board_desc_t *self) {
     otto_robot_ctx_t *ctx = (otto_robot_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     if (ctx->boot_button) board_btn_delete(ctx->boot_button);
     free(ctx);
 }

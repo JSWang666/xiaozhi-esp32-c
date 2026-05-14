@@ -359,6 +359,10 @@ static void *get_backlight(board_desc_t *self)
 static void destroy(board_desc_t *self)
 {
     cardputer_ctx_t *ctx = (cardputer_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     if (ctx->keyboard) tca8418_keyboard_destroy(ctx->keyboard);
     if (ctx->wifi_config_ui) wifi_config_ui_destroy(ctx->wifi_config_ui);

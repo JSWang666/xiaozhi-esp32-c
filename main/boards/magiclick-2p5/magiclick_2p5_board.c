@@ -527,6 +527,10 @@ static bool m2p5_get_battery_level(board_desc_t *self, int *level,
 static void m2p5_destroy(board_desc_t *self)
 {
     magiclick_2p5_ctx_t *ctx = (magiclick_2p5_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     if (ctx->battery_timer) {
         esp_timer_stop(ctx->battery_timer);
         esp_timer_delete(ctx->battery_timer);
@@ -552,6 +556,10 @@ board_desc_t *create_board_desc(void)
     ctx->base.get_backlight = m2p5_get_backlight;
     ctx->base.get_battery_level = m2p5_get_battery_level;
     ctx->base.destroy = m2p5_destroy;
+    ctx->base.modem_tx_pin = ML307_TX_PIN;
+    ctx->base.modem_rx_pin = ML307_RX_PIN;
+    ctx->base.modem_dtr_pin = GPIO_NUM_NC;
+    ctx->base.default_net_type = 1;
 
     check_pcb_version(ctx);
     init_led_power();

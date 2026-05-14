@@ -201,6 +201,10 @@ static void *get_backlight(board_desc_t *self)
 static void board_destroy(board_desc_t *self)
 {
     xingzhi_ctx_t *ctx = (xingzhi_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     board_btn_delete(ctx->volume_up_button);
     board_btn_delete(ctx->volume_down_button);
@@ -218,6 +222,10 @@ board_desc_t *create_board_desc(void)
     ctx->base.get_display = get_display;
     ctx->base.get_backlight = get_backlight;
     ctx->base.destroy = board_destroy;
+    ctx->base.modem_tx_pin = ML307_TX_PIN;
+    ctx->base.modem_rx_pin = ML307_RX_PIN;
+    ctx->base.modem_dtr_pin = GPIO_NUM_NC;
+    ctx->base.default_net_type = 1;
 
     init_i2c(ctx);
     init_spi();

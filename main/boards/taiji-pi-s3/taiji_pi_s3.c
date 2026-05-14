@@ -392,7 +392,15 @@ static void *get_backlight(board_desc_t *self)
     return ctx->backlight;
 }
 
-static void board_destroy(board_desc_t *self) { free(self); }
+static void board_destroy(board_desc_t *self)
+{
+    taiji_ctx_t *ctx = (taiji_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
+    free(ctx);
+}
 
 board_desc_t *create_board_desc(void)
 {

@@ -306,6 +306,10 @@ board_desc_t *create_board_desc(void)
     ctx->base.get_display = bd_get_display;
     ctx->base.get_battery_level = bd_get_battery_level;
     ctx->base.destroy = bd_destroy;
+    ctx->base.modem_tx_pin = ML307_TX_PIN;
+    ctx->base.modem_rx_pin = ML307_RX_PIN;
+    ctx->base.modem_dtr_pin = GPIO_NUM_NC;
+    ctx->base.default_net_type = 1;
 
     init_power(ctx);
     init_display_i2c(ctx);

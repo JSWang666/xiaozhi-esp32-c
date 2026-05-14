@@ -550,6 +550,10 @@ static bool get_battery_level(board_desc_t *self, int *level, bool *charging, bo
 static void destroy(board_desc_t *self)
 {
     sensecap_ctx_t *ctx = (sensecap_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     if (ctx->knob) board_knob_delete(ctx->knob);
     if (ctx->pst) power_save_timer_destroy(ctx->pst);
     if (ctx->camera) sscma_camera_destroy(ctx->camera);

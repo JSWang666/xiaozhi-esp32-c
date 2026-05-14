@@ -299,6 +299,10 @@ static void *get_backlight(board_desc_t *self)
 static void board_destroy(board_desc_t *self)
 {
     atk_dnesp32s3_box2_wifi_ctx_t *ctx = (atk_dnesp32s3_box2_wifi_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     free(ctx);
 }
 

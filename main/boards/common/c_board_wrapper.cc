@@ -95,6 +95,14 @@ public:
     }
 };
 
+/* Non-owning view of a board-owned backlight_t*. Board destroy() must call
+ * backlight_destroy; we must not destroy again from ~Backlight. */
+class CBacklightAdapter : public Backlight {
+public:
+    explicit CBacklightAdapter(backlight_t *c) : Backlight(c) {}
+    ~CBacklightAdapter() { handle_ = nullptr; }
+};
+
 /* ===== Shared delegate that holds the C board_desc_t* and adapter cache.
  * Used as a member of every CBoardWrapper<T> so all wrappers share the
  * exact same getter logic regardless of which Board base they extend. ===== */
@@ -159,7 +167,7 @@ public:
         if (!desc_ || !desc_->get_backlight) return fallback;
         backlight_t *c = (backlight_t *)desc_->get_backlight(desc_);
         if (!c) return fallback;
-        backlight_adapter_ = new Backlight(c);
+        backlight_adapter_ = new CBacklightAdapter(c);
         return backlight_adapter_;
     }
 

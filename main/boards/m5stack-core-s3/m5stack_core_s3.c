@@ -305,6 +305,10 @@ static bool get_battery_level(board_desc_t *self, int *level, bool *charging, bo
 static void destroy(board_desc_t *self)
 {
     cores3_ctx_t *ctx = (cores3_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     if (ctx->touchpad_timer) esp_timer_stop(ctx->touchpad_timer);
     free(ctx->ft6336_buf);
     if (ctx->ft6336) i2c_device_destroy(ctx->ft6336);

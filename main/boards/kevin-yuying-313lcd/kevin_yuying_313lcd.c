@@ -134,7 +134,12 @@ static void *get_backlight(board_desc_t *self) { return ((yuying_ctx_t *)self)->
 
 static void destroy(board_desc_t *self)
 {
-    free(self);
+    yuying_ctx_t *ctx = (yuying_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
+    free(ctx);
 }
 
 board_desc_t *create_board_desc(void)

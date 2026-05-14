@@ -263,6 +263,10 @@ static void *zcb_get_backlight(board_desc_t *self)
 static void zcb_destroy(board_desc_t *self)
 {
     zhengchen_cam_ctx_t *ctx = (zhengchen_cam_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     board_btn_delete(ctx->volume_up_button);
     board_btn_delete(ctx->volume_down_button);

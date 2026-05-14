@@ -164,6 +164,10 @@ static bool yl_get_battery_level(board_desc_t *self, int *level,
 static void yl_destroy(board_desc_t *self)
 {
     yunliao_s3_ctx_t *ctx = (yunliao_s3_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     free(ctx);
 }
@@ -180,6 +184,10 @@ board_desc_t *create_board_desc(void)
     ctx->base.get_backlight = yl_get_backlight;
     ctx->base.get_battery_level = yl_get_battery_level;
     ctx->base.destroy = yl_destroy;
+    ctx->base.modem_tx_pin = ML307_TX_PIN;
+    ctx->base.modem_rx_pin = ML307_RX_PIN;
+    ctx->base.modem_dtr_pin = GPIO_NUM_NC;
+    ctx->base.default_net_type = 1;
 
     ctx->power_manager = yunliao_pm_create();
     yunliao_pm_start_5v(ctx->power_manager);

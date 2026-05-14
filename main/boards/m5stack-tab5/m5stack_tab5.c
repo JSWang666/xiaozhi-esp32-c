@@ -324,6 +324,10 @@ static void *get_backlight(board_desc_t *self)
 static void destroy(board_desc_t *self)
 {
     tab5_ctx_t *ctx = (tab5_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     if (ctx->pi4ioe1) i2c_device_destroy(ctx->pi4ioe1);
     if (ctx->pi4ioe2) i2c_device_destroy(ctx->pi4ioe2);

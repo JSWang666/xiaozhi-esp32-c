@@ -283,6 +283,10 @@ static bool get_battery_level(board_desc_t *self, int *level, bool *charging, bo
 static void board_destroy(board_desc_t *self)
 {
     board_ctx_t *ctx = (board_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     if (ctx->power_save_timer) power_save_timer_destroy(ctx->power_save_timer);
     if (ctx->pmic) axp2101_destroy(ctx->pmic);

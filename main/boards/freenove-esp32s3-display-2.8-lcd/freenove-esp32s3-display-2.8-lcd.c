@@ -158,6 +158,10 @@ static void *freenove_get_backlight(board_desc_t *self)
 static void freenove_destroy(board_desc_t *self)
 {
     freenove_ctx_t *ctx = (freenove_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     free(ctx);
 }

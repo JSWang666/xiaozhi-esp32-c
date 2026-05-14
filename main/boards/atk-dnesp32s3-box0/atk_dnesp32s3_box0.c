@@ -228,6 +228,10 @@ static void *get_backlight(board_desc_t *self)
 static void board_destroy(board_desc_t *self)
 {
     atk_dnesp32s3_box0_ctx_t *ctx = (atk_dnesp32s3_box0_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->middle_button);
     board_btn_delete(ctx->left_button);
     board_btn_delete(ctx->right_button);

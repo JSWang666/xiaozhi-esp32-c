@@ -266,6 +266,10 @@ static void *get_backlight(board_desc_t *self)
 static void destroy(board_desc_t *self)
 {
     esp_box_lite_ctx_t *ctx = (esp_box_lite_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     for (int i = 0; i < BSP_ADC_BUTTON_NUM; i++) {
         board_btn_delete(ctx->adc_button[i]);

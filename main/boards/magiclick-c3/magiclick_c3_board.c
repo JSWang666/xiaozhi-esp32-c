@@ -216,6 +216,10 @@ static void *mc3_get_backlight(board_desc_t *self)
 static void mc3_destroy(board_desc_t *self)
 {
     magiclick_c3_ctx_t *ctx = (magiclick_c3_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     if (ctx->pst) power_save_timer_destroy(ctx->pst);
     free(ctx);

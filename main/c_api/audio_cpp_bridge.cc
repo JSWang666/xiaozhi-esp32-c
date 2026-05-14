@@ -6,7 +6,13 @@
 #include <string>
 #include <vector>
 
+#include "audio_codec.h"
 #include "audio_service.h"
+#include <esp_log.h>
+
+static const char *TAG = "audio_cpp_bridge";
+
+extern AudioCodec *codec_unwrap_cpp(audio_codec_t *c);
 
 struct audio_service {
     AudioService impl;
@@ -56,7 +62,15 @@ esp_err_t audio_service_init(audio_service_t *svc, void *audio_codec_handle) {
     if (svc == nullptr || audio_codec_handle == nullptr) {
         return ESP_ERR_INVALID_ARG;
     }
-    svc->impl.Initialize(static_cast<AudioCodec*>(audio_codec_handle));
+    auto *c = reinterpret_cast<audio_codec_t *>(audio_codec_handle);
+    AudioCodec *codec = codec_unwrap_cpp(c);
+    if (codec == nullptr) {
+        ESP_LOGE(TAG,
+                 "audio_service_init: codec must be from codec_cpp_bridge "
+                 "(e.g. es8311_codec_create), not a raw audio_codec_t*");
+        return ESP_ERR_INVALID_ARG;
+    }
+    svc->impl.Initialize(codec);
     return ESP_OK;
 }
 

@@ -413,6 +413,10 @@ static bool m2p4_get_battery_level(board_desc_t *self, int *level,
 static void m2p4_destroy(board_desc_t *self)
 {
     magiclick_2p4_ctx_t *ctx = (magiclick_2p4_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     if (ctx->battery_timer) {
         esp_timer_stop(ctx->battery_timer);
         esp_timer_delete(ctx->battery_timer);

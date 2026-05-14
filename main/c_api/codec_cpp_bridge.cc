@@ -162,4 +162,14 @@ audio_codec_t *box_codec_create(void *i2c_handle,
     return wrap_cpp_codec(impl);
 }
 
+}  /* extern "C" */
+
+AudioCodec *codec_unwrap_cpp(audio_codec_t *c) {
+    if (!c || !c->ops) {
+        return nullptr;
+    }
+    if (c->ops != &cpp_codec_ops) {
+        return nullptr;
+    }
+    return reinterpret_cast<codec_wrapper *>(c)->impl;
 }

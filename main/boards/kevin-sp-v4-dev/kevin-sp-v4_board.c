@@ -152,6 +152,10 @@ static void *get_backlight(board_desc_t *self) { return ((kevin_sp_v4_ctx_t *)se
 static void destroy(board_desc_t *self)
 {
     kevin_sp_v4_ctx_t *ctx = (kevin_sp_v4_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     free(ctx);
 }
 

@@ -21,6 +21,7 @@
 #include <esp_lcd_gc9a01.h>
 #include <esp_lcd_io_spi.h>
 #include "c_api/board_c_api.h"
+#include "backlight.h"
 
 #define TAG "AtomS3R+EchoPyramid"
 
@@ -558,6 +559,10 @@ static void *get_backlight(board_desc_t *self)
 static void destroy(board_desc_t *self)
 {
     pyramid_ctx_t *ctx = (pyramid_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     if (ctx->si5351) i2c_device_destroy(ctx->si5351);
     if (ctx->aw87559) i2c_device_destroy(ctx->aw87559);

@@ -155,6 +155,10 @@ static void *get_backlight(board_desc_t *self)
 static void board_destroy(board_desc_t *self)
 {
     sp154_ctx_t *ctx = (sp154_ctx_t *)self;
+    if (ctx->backlight) {
+        backlight_destroy(ctx->backlight);
+        ctx->backlight = NULL;
+    }
     board_btn_delete(ctx->boot_button);
     free(ctx);
 }
