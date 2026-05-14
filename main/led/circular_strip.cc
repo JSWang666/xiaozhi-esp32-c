@@ -196,7 +196,10 @@ void CircularStrip::SetBrightness(uint8_t default_brightness, uint8_t low_bright
 
 void CircularStrip::OnStateChanged() {
     auto& app = Application::GetInstance();
-    auto device_state = app.GetDeviceState();
+    OnStateChanged(app.GetDeviceState(), app.IsVoiceDetected());
+}
+
+void CircularStrip::OnStateChanged(DeviceState device_state, bool /*is_voice_detected*/) {
     switch (device_state) {
         case kDeviceStateStarting: {
             StripColor low = { 0, 0, 0 };

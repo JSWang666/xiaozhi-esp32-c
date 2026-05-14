@@ -50,12 +50,18 @@ static void disp_set_power_save(display_t *d, bool on) {
 }
 
 static bool disp_lock(display_t *d, int timeout_ms) {
-    (void)d; (void)timeout_ms;
-    return true;
+    auto *w = reinterpret_cast<display_wrapper *>(d);
+    if (!w || !w->impl) {
+        return false;
+    }
+    return w->impl->Lock(timeout_ms);
 }
 
 static void disp_unlock(display_t *d) {
-    (void)d;
+    auto *w = reinterpret_cast<display_wrapper *>(d);
+    if (w && w->impl) {
+        w->impl->Unlock();
+    }
 }
 
 static void disp_destroy(display_t *d) {

@@ -206,7 +206,10 @@ bool IRAM_ATTR GpioLed::FadeCallback(const ledc_cb_param_t *param, void *user_ar
 
 void GpioLed::OnStateChanged() {
     auto& app = Application::GetInstance();
-    auto device_state = app.GetDeviceState();
+    OnStateChanged(app.GetDeviceState(), app.IsVoiceDetected());
+}
+
+void GpioLed::OnStateChanged(DeviceState device_state, bool is_voice_detected) {
     switch (device_state) {
         case kDeviceStateStarting:
             SetBrightness(DEFAULT_BRIGHTNESS);
@@ -227,7 +230,7 @@ void GpioLed::OnStateChanged() {
             break;
         case kDeviceStateListening:
         case kDeviceStateAudioTesting:
-            if (app.IsVoiceDetected()) {
+            if (is_voice_detected) {
                 SetBrightness(HIGH_BRIGHTNESS);
             } else {
                 SetBrightness(LOW_BRIGHTNESS);

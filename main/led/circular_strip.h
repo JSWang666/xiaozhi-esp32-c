@@ -22,6 +22,8 @@ public:
     virtual ~CircularStrip();
 
     void OnStateChanged() override;
+    /** Explicit state (e.g. from C `led_ops_t`); avoids stale reads vs Application. */
+    void OnStateChanged(DeviceState device_state, bool is_voice_detected);
     void SetBrightness(uint8_t default_brightness, uint8_t low_brightness);
     void SetAllColor(StripColor color);
     void SetSingleColor(uint8_t index, StripColor color);

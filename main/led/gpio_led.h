@@ -18,6 +18,7 @@ class GpioLed : public Led {
     virtual ~GpioLed();
 
     void OnStateChanged() override;
+    void OnStateChanged(DeviceState device_state, bool is_voice_detected);
     void TurnOn();
     void TurnOff();
     void SetBrightness(uint8_t brightness);

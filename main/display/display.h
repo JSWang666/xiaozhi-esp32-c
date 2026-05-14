@@ -45,6 +45,16 @@ static inline void display_set_emotion(display_t *d, const char *e) {
 static inline void display_set_chat_message(display_t *d, const char *role, const char *content) {
     if (d && d->ops && d->ops->set_chat_message) d->ops->set_chat_message(d, role, content);
 }
+static inline void display_clear_chat_messages(display_t *d) {
+    if (d && d->ops && d->ops->clear_chat_messages) d->ops->clear_chat_messages(d);
+}
+static inline bool display_lock(display_t *d, int timeout_ms) {
+    if (d && d->ops && d->ops->lock) return d->ops->lock(d, timeout_ms);
+    return false;
+}
+static inline void display_unlock(display_t *d) {
+    if (d && d->ops && d->ops->unlock) d->ops->unlock(d);
+}
 static inline void display_setup_ui(display_t *d) {
     if (d && d->ops && d->ops->setup_ui) d->ops->setup_ui(d);
 }
@@ -112,6 +122,10 @@ public:
 
     display_t *c_display() { return c_display_; }
 
+    /** LVGL / cross-thread mutual exclusion; used by DisplayLockGuard and C display_ops. */
+    virtual bool Lock(int timeout_ms = 0) = 0;
+    virtual void Unlock() = 0;
+
 protected:
     int width_ = 0;
     int height_ = 0;
@@ -119,10 +133,6 @@ protected:
     display_t *c_display_ = nullptr;
 
     Theme* current_theme_ = nullptr;
-
-    friend class DisplayLockGuard;
-    virtual bool Lock(int timeout_ms = 0) = 0;
-    virtual void Unlock() = 0;
 };
 
 class DisplayLockGuard {

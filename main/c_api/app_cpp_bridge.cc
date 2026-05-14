@@ -3,6 +3,7 @@
 #include <new>
 
 #include "application.h"
+#include "board_c_api.h"
 
 struct app_context {
     app_config_t cfg;
@@ -79,6 +80,16 @@ esp_err_t app_schedule(app_context_t *ctx, app_task_fn task, void *arg) {
 
 esp_err_t app_toggle_chat(app_context_t *ctx) {
     return app_post_event(ctx, APP_EVENT_TOGGLE_CHAT, nullptr);
+}
+
+esp_err_t app_enter_wifi_config_mode(app_context_t *ctx) {
+    if (ctx == nullptr) {
+        ctx = app_get_context();
+    }
+    if (ctx == nullptr) {
+        return ESP_ERR_INVALID_STATE;
+    }
+    return board_enter_wifi_config_mode(board_get_instance());
 }
 
 esp_err_t app_start_listening(app_context_t *ctx) {

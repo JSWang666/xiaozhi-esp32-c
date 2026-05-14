@@ -46,6 +46,8 @@ esp_err_t app_post_event(app_context_t *ctx, app_event_t event, const void *even
 esp_err_t app_schedule(app_context_t *ctx, app_task_fn task, void *arg);
 
 esp_err_t app_toggle_chat(app_context_t *ctx);
+/** Enter Wi-Fi provisioning (delegates to `board_enter_wifi_config_mode`). */
+esp_err_t app_enter_wifi_config_mode(app_context_t *ctx);
 esp_err_t app_start_listening(app_context_t *ctx);
 esp_err_t app_stop_listening(app_context_t *ctx);
 esp_err_t app_reboot(app_context_t *ctx);

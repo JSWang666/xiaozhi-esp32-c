@@ -16,7 +16,7 @@ struct gpio_led_wrapper {
 
 static void circular_strip_on_state(led_t *led, DeviceState state, bool voice) {
     auto *w = reinterpret_cast<circular_strip_wrapper *>(led);
-    if (w && w->impl) w->impl->OnStateChanged();
+    if (w && w->impl) w->impl->OnStateChanged(state, voice);
 }
 
 static void circular_strip_destroy(led_t *led) {
@@ -34,7 +34,7 @@ static const led_ops_t circular_strip_c_ops = {
 
 static void gpio_led_on_state(led_t *led, DeviceState state, bool voice) {
     auto *w = reinterpret_cast<gpio_led_wrapper *>(led);
-    if (w && w->impl) w->impl->OnStateChanged();
+    if (w && w->impl) w->impl->OnStateChanged(state, voice);
 }
 
 static void gpio_led_destroy(led_t *led) {

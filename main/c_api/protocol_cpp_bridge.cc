@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "protocol.h"
 #include "mqtt_protocol.h"
@@ -42,12 +43,15 @@ static void wire_callbacks(protocol_handle_t* p) {
         if (!p->callbacks.on_audio || !packet) {
             return;
         }
+        /* Copy payload: `packet` is freed when this lambda returns; C callback
+         * must not retain pointers into the unique_ptr-owned buffer. */
+        std::vector<uint8_t> payload_copy = packet->payload;
         protocol_audio_packet_t c_pkt = {
             .sample_rate = packet->sample_rate,
             .frame_duration = packet->frame_duration,
             .timestamp = packet->timestamp,
-            .payload = packet->payload.data(),
-            .payload_size = packet->payload.size(),
+            .payload = payload_copy.data(),
+            .payload_size = payload_copy.size(),
         };
         p->callbacks.on_audio(p->callbacks.user_ctx, &c_pkt);
     });
