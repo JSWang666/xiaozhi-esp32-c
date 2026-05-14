@@ -7,6 +7,8 @@
 #include "audio/codecs/no_audio_codec.h"
 
 #include <new>
+#include <vector>
+
 #include <esp_log.h>
 
 #define TAG "CodecBridge"
@@ -14,13 +16,19 @@
 struct codec_wrapper {
     audio_codec_t base;
     AudioCodec *impl;
+    /* Reused across Read/Write to avoid per-call heap churn until full C path. */
+    std::vector<int16_t> pcm_read;
+    std::vector<int16_t> pcm_write;
 };
 
 static int codec_wrap_read(audio_codec_t *c, int16_t *dest, int samples) {
     auto *w = reinterpret_cast<codec_wrapper *>(c);
-    std::vector<int16_t> buf(samples);
-    if (w->impl->InputData(buf)) {
-        memcpy(dest, buf.data(), samples * sizeof(int16_t));
+    if (samples <= 0) {
+        return 0;
+    }
+    w->pcm_read.resize((size_t)samples);
+    if (w->impl->InputData(w->pcm_read)) {
+        memcpy(dest, w->pcm_read.data(), (size_t)samples * sizeof(int16_t));
         return samples;
     }
     return 0;
@@ -28,8 +36,12 @@ static int codec_wrap_read(audio_codec_t *c, int16_t *dest, int samples) {
 
 static int codec_wrap_write(audio_codec_t *c, const int16_t *data, int samples) {
     auto *w = reinterpret_cast<codec_wrapper *>(c);
-    std::vector<int16_t> buf(data, data + samples);
-    w->impl->OutputData(buf);
+    if (samples <= 0) {
+        return 0;
+    }
+    w->pcm_write.resize((size_t)samples);
+    memcpy(w->pcm_write.data(), data, (size_t)samples * sizeof(int16_t));
+    w->impl->OutputData(w->pcm_write);
     return samples;
 }
 
