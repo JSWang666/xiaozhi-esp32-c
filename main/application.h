@@ -13,7 +13,7 @@
 
 #include "protocol.h"
 #include "ota.h"
-#include "audio_service.h"
+#include "audio_c_api.h"
 #include "device_state.h"
 #include "device_state_machine.h"
 #include "c_api/main_event_bits.h"
@@ -49,7 +49,7 @@ public:
     void Run();
 
     DeviceState GetDeviceState() const { return state_machine_.GetState(); }
-    bool IsVoiceDetected() const { return audio_service_.IsVoiceDetected(); }
+    bool IsVoiceDetected() const { return audio_service_is_voice_detected(audio_svc_); }
     
     /**
      * Request state transition
@@ -96,7 +96,7 @@ public:
     void SetAecMode(AecMode mode);
     AecMode GetAecMode() const { return aec_mode_; }
     void PlaySound(const std::string_view& sound);
-    AudioService& GetAudioService() { return audio_service_; }
+    audio_service_t *GetAudioService() { return audio_svc_; }
     
     /**
      * Reset protocol resources (thread-safe)
@@ -121,7 +121,7 @@ private:
     ListeningMode listening_mode_ = kListeningModeAutoStop;
     AecMode aec_mode_ = kAecOff;
     std::string last_error_message_;
-    AudioService audio_service_;
+    audio_service_t *audio_svc_ = nullptr;
     std::unique_ptr<Ota> ota_;
 
     bool has_server_time_ = false;

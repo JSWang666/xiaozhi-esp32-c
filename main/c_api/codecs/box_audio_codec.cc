@@ -1,4 +1,4 @@
-#include "box_audio_codec.h"
+#include "audio/codecs/box_audio_codec.h"
 
 #include <esp_log.h>
 #include <driver/i2c_master.h>

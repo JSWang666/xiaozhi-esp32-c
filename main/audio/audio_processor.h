@@ -64,6 +64,10 @@ static inline void audio_processor_destroy(audio_processor_t *p) {
 
 audio_processor_t *no_audio_processor_create(void);
 
+#if CONFIG_USE_AUDIO_PROCESSOR
+audio_processor_t *afe_audio_processor_create(void);
+#endif
+
 #ifdef __cplusplus
 }
 #endif
@@ -74,7 +78,7 @@ audio_processor_t *no_audio_processor_create(void);
 #include <functional>
 
 #include <model_path.h>
-#include "audio_codec.h"
+#include "audio_codec_cxx.h"
 
 class AudioProcessor {
 public:

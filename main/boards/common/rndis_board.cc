@@ -1,4 +1,5 @@
 #include "rndis_board.h"
+#include "audio_codec_cxx.h"
 #include "display.h"
 #include "application.h"
 #include "system_info.h"

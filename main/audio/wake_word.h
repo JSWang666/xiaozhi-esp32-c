@@ -73,7 +73,7 @@ static inline void wake_word_destroy(wake_word_t *w) {
 #include <functional>
 
 #include <model_path.h>
-#include "audio_codec.h"
+#include "audio_codec_cxx.h"
 
 class WakeWord {
 public:

@@ -27,6 +27,7 @@ audio_codec_t *no_audio_codec_simplex_create_ex(int input_sample_rate, int outpu
 #endif
 
 #ifdef __cplusplus
+#include "audio_codec_cxx.h"
 #include <driver/i2s_pdm.h>
 #include <mutex>
 

@@ -1,15 +1,15 @@
 # Define source files
 set(SOURCES "audio/audio_codec.c"
-            "audio/audio_codec.cc"
-            "audio/audio_service.cc"
+            "c_api/audio_codec_base.cc"
+            "audio/audio_service.c"
             "audio/demuxer/ogg_demuxer.c"
             "audio/codecs/no_audio_codec.c"
-            "audio/codecs/no_audio_codec.cc"
-            "audio/codecs/box_audio_codec.cc"
-            "audio/codecs/es8311_audio_codec.cc"
-            "audio/codecs/es8374_audio_codec.cc"
-            "audio/codecs/es8388_audio_codec.cc"
-            "audio/codecs/es8389_audio_codec.cc"
+            "c_api/codecs/no_audio_codec.cc"
+            "c_api/codecs/box_audio_codec.cc"
+            "c_api/codecs/es8311_audio_codec.cc"
+            "c_api/codecs/es8374_audio_codec.cc"
+            "c_api/codecs/es8388_audio_codec.cc"
+            "c_api/codecs/es8389_audio_codec.cc"
             "audio/codecs/dummy_audio_codec.c"
             "audio/processors/audio_debugger.c"
             "led/single_led.c"
@@ -43,7 +43,6 @@ set(SOURCES "audio/audio_codec.c"
             "c_api/app_runtime.c"
             "c_api/application_c_access.cc"
             "c_api/app_cpp_bridge.cc"
-            "c_api/audio_cpp_bridge.cc"
             "c_api/board_cpp_bridge.cc"
             "c_api/protocol_cpp_bridge.cc"
             "c_api/ota_cpp_bridge.cc"
@@ -56,7 +55,7 @@ set(SOURCES "audio/audio_codec.c"
                         "assets/lang_c_bridge.cc"
             )
 
-set(INCLUDE_DIRS "." "display" "display/lvgl_display" "display/lvgl_display/jpg" "audio" "audio/demuxer" "protocols")
+set(INCLUDE_DIRS "." "c_api" "display" "display/lvgl_display" "display/lvgl_display/jpg" "audio" "audio/demuxer" "protocols")
 
 # Add board common files
 list(APPEND SOURCES
@@ -838,16 +837,15 @@ list(APPEND SOURCES ${BOARD_SOURCES})
 
 # Select audio processor according to Kconfig
 if(CONFIG_USE_AUDIO_PROCESSOR)
-    list(APPEND SOURCES "audio/processors/afe_audio_processor.cc")
+    list(APPEND SOURCES "audio/processors/afe_audio_processor.c")
 else()
-    list(APPEND SOURCES "audio/processors/no_audio_processor.c"
-                        "audio/processors/no_audio_processor.cc")
+    list(APPEND SOURCES "audio/processors/no_audio_processor.c")
 endif()
 if(CONFIG_IDF_TARGET_ESP32S3 OR CONFIG_IDF_TARGET_ESP32P4)
-    list(APPEND SOURCES "audio/wake_words/afe_wake_word.cc")
-    list(APPEND SOURCES "audio/wake_words/custom_wake_word.cc")
+    list(APPEND SOURCES "audio/wake_words/afe_wake_word.c")
+    list(APPEND SOURCES "audio/wake_words/custom_wake_word.c")
 else()
-    list(APPEND SOURCES "audio/wake_words/esp_wake_word.cc")
+    list(APPEND SOURCES "audio/wake_words/esp_wake_word.c")
 endif()
 
 # Auto Select Additional Sources
@@ -965,9 +963,9 @@ file(GLOB COMMON_SOUNDS ${CMAKE_CURRENT_SOURCE_DIR}/assets/common/*.ogg)
 
 # If target chip is ESP32, exclude specific files to avoid build errors
 if(CONFIG_IDF_TARGET_ESP32)
-    list(REMOVE_ITEM SOURCES "audio/codecs/box_audio_codec.cc"
-                             "audio/codecs/es8388_audio_codec.cc"
-                             "audio/codecs/es8389_audio_codec.cc"
+    list(REMOVE_ITEM SOURCES "c_api/codecs/box_audio_codec.cc"
+                             "c_api/codecs/es8388_audio_codec.cc"
+                             "c_api/codecs/es8389_audio_codec.cc"
                              "led/gpio_led.cc"
                              "display/lvgl_display/jpg/image_to_jpeg.cpp"
                              "display/lvgl_display/jpg/jpeg_to_image.c"

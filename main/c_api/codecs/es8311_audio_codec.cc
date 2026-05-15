@@ -1,4 +1,4 @@
-#include "es8311_audio_codec.h"
+#include "audio/codecs/es8311_audio_codec.h"
 
 #include <esp_log.h>
 

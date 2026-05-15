@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <driver/i2c_master.h>
 
-#include "audio/audio_codec.h"
+#include "audio_codec.h"
 #include "backlight.h"
 #include "display/display.h"
 

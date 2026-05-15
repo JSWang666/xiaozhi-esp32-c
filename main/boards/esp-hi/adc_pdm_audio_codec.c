@@ -1,4 +1,4 @@
-#include "audio/audio_codec.h"
+#include "audio_codec.h"
 
 #include <esp_log.h>
 #include <esp_timer.h>

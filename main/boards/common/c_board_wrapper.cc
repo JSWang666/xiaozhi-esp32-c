@@ -13,9 +13,9 @@
 
 #include "led/led.h"
 #include "audio/codecs/no_audio_codec.h"
-#include "audio/audio_codec.h"
 #include "display/display.h"
 #include "backlight.h"
+#include "camera.h"
 
 #include <esp_log.h>
 #include <driver/gpio.h>
@@ -26,6 +26,10 @@ static const char *TAG = "CBoardWrapper";
 
 /* Forward-declared in display_cpp_bridge.cc */
 Display *display_unwrap_cpp(display_t *d);
+
+/* Optional board-specific bridge from C `get_camera` handle to C++ Camera (strong
+ * definition e.g. on sensecap-watcher; weak stub in c_board_wrapper.cc). */
+extern "C" Camera *board_bridge_wrap_camera_handle(board_camera_kind_t kind, void *raw);
 
 namespace {
 
@@ -115,6 +119,7 @@ public:
         delete led_adapter_;
         delete codec_adapter_;
         delete backlight_adapter_;
+        delete camera_cpp_adapter_;
         if (desc_ && desc_->destroy) {
             desc_->destroy(desc_);
         }
@@ -171,6 +176,17 @@ public:
         return backlight_adapter_;
     }
 
+    Camera *GetCamera(Camera *fallback) {
+        if (camera_cpp_adapter_) return camera_cpp_adapter_;
+        if (!desc_ || !desc_->get_camera) return fallback;
+        void *raw = desc_->get_camera(desc_);
+        if (!raw) return fallback;
+        Camera *wrapped = board_bridge_wrap_camera_handle(desc_->camera_kind, raw);
+        if (!wrapped) return fallback;
+        camera_cpp_adapter_ = wrapped;
+        return camera_cpp_adapter_;
+    }
+
     bool GetBatteryLevel(int &level, bool &charging, bool &discharging) {
         if (desc_ && desc_->get_battery_level) {
             return desc_->get_battery_level(desc_, &level, &charging, &discharging);
@@ -190,6 +206,7 @@ private:
     Led *led_adapter_ = nullptr;
     AudioCodec *codec_adapter_ = nullptr;
     Backlight *backlight_adapter_ = nullptr;
+    Camera *camera_cpp_adapter_ = nullptr;
 };
 
 /* ===== Template wrapper that grafts a board_desc_t onto any concrete Board
@@ -222,6 +239,9 @@ public:
     Backlight *GetBacklight() override {
         return del_.GetBacklight(Board::GetBacklight());
     }
+    Camera *GetCamera() override {
+        return del_.GetCamera(Board::GetCamera());
+    }
     bool GetBatteryLevel(int &level, bool &charging, bool &discharging) override {
         if (del_.GetBatteryLevel(level, charging, discharging)) return true;
         return BaseBoard::GetBatteryLevel(level, charging, discharging);
@@ -236,6 +256,13 @@ private:
 };
 
 }  // namespace
+
+extern "C" __attribute__((weak)) Camera *board_bridge_wrap_camera_handle(board_camera_kind_t kind,
+                                                                          void *raw) {
+    (void)kind;
+    (void)raw;
+    return nullptr;
+}
 
 extern "C" __attribute__((weak)) board_desc_t *create_board_desc(void)
 {

@@ -7,6 +7,10 @@
 
 #include "esp_err.h"
 
+#ifndef OPUS_FRAME_DURATION_MS
+#define OPUS_FRAME_DURATION_MS 60
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -60,7 +64,12 @@ esp_err_t audio_service_pop_send_packet(audio_service_t *svc, audio_packet_t *ou
 esp_err_t audio_service_pop_wake_word_packet(audio_service_t *svc, audio_packet_t *out_packet);
 void audio_service_free_packet(audio_packet_t *packet);
 
-esp_err_t audio_service_play_sound(audio_service_t *svc, const char *sound_name);
+esp_err_t audio_service_play_ogg(audio_service_t *svc, const uint8_t *data, size_t len);
+
+/** @return number of int16 samples written to @p out, or 0 on failure */
+size_t audio_service_read_audio_data(audio_service_t *svc, int16_t *out, size_t out_cap_int16, int sample_rate,
+                                     int samples_per_ch);
+
 esp_err_t audio_service_reset_decoder(audio_service_t *svc);
 
 esp_err_t audio_service_encode_wake_word(audio_service_t *svc);

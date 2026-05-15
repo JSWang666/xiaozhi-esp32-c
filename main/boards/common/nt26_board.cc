@@ -1,7 +1,7 @@
 #include "nt26_board.h"
 #include "display.h"
 #include "application.h"
-#include "audio_codec.h"
+#include "audio_codec_cxx.h"
 #include <esp_log.h>
 #include <font_awesome.h>
 #include <cJSON.h>

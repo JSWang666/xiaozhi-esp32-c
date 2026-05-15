@@ -1,6 +1,6 @@
 #include "ml307_board.h"
 
-#include "audio_codec.h"
+#include "audio_codec_cxx.h"
 #include "display.h"
 
 #include <esp_log.h>

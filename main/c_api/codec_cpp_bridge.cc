@@ -1,4 +1,4 @@
-#include "audio_codec.h"
+#include "audio_codec_cxx.h"
 #include "audio/codecs/es8311_audio_codec.h"
 #include "audio/codecs/es8374_audio_codec.h"
 #include "audio/codecs/es8388_audio_codec.h"
@@ -58,11 +58,13 @@ static void codec_wrap_set_gain(audio_codec_t *c, float gain) {
 static void codec_wrap_enable_input(audio_codec_t *c, bool enable) {
     auto *w = reinterpret_cast<codec_wrapper *>(c);
     w->impl->EnableInput(enable);
+    w->base.input_enabled = w->impl->input_enabled();
 }
 
 static void codec_wrap_enable_output(audio_codec_t *c, bool enable) {
     auto *w = reinterpret_cast<codec_wrapper *>(c);
     w->impl->EnableOutput(enable);
+    w->base.output_enabled = w->impl->output_enabled();
 }
 
 static void codec_wrap_start(audio_codec_t *c) {

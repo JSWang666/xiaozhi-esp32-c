@@ -107,8 +107,7 @@ void afsk_receive_wifi_credentials(struct app_context *app_ctx,
 #include <vector>
 #include <cstring>
 #include "wifi_manager.h"
-#include "application.h"
-#include "ssid_manager.h"
+#include "audio_c_api.h"
 #include "c_api/app_c_api.h"
 
 static const size_t kAudioSampleRate = AFSK_AUDIO_SAMPLE_RATE;
@@ -128,13 +127,12 @@ struct CppContext {
 
 inline bool read_audio_cb(void *ctx, int16_t *out_data, size_t max_samples,
                            size_t *actual_samples, int sample_rate, int num_samples) {
-    auto *c = static_cast<CppContext *>(ctx);
-    std::vector<int16_t> data;
-    if (!c->app->GetAudioService().ReadAudioData(data, sample_rate, num_samples))
+    (void)ctx;
+    size_t n = audio_service_read_audio_data(audio_service_get_instance(), out_data, max_samples, sample_rate,
+                                             num_samples);
+    if (n == 0) {
         return false;
-    size_t n = data.size();
-    if (n > max_samples) n = max_samples;
-    std::memcpy(out_data, data.data(), n * sizeof(int16_t));
+    }
     *actual_samples = n;
     return true;
 }

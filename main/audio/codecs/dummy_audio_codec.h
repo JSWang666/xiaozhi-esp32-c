@@ -14,6 +14,7 @@ audio_codec_t *dummy_audio_codec_create(int input_sample_rate, int output_sample
 #endif
 
 #ifdef __cplusplus
+#include "audio_codec_cxx.h"
 class DummyAudioCodec : public AudioCodec {
 public:
     DummyAudioCodec(int input_sample_rate, int output_sample_rate) {

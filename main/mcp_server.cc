@@ -14,6 +14,7 @@
 #include "display.h"
 #include "oled_display.h"
 #include "board.h"
+#include "audio_codec_cxx.h"
 #include "settings.h"
 #include "lvgl_theme.h"
 #include "lvgl_display.h"

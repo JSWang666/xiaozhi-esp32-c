@@ -1,4 +1,4 @@
-#include "audio/audio_codec.h"
+#include "audio_codec.h"
 #include "config.h"
 
 #include <stdlib.h>

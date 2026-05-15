@@ -2,6 +2,7 @@
 #include "board.h"
 #include "display.h"
 #include "application.h"
+#include "audio_c_api.h"
 #include "lvgl_theme.h"
 #include "emote_display.h"
 #include "expression_emote.h"
@@ -99,7 +100,7 @@ bool Assets::LoadSrmodelsFromIndex(Assets* assets, cJSON* root) {
             assets->models_list_ = srmodel_load(static_cast<uint8_t*>(ptr));
             if (assets->models_list_ != nullptr) {
                 auto& app = Application::GetInstance();
-                app.GetAudioService().SetModelsList(assets->models_list_);
+                audio_service_set_models_list(app.GetAudioService(), assets->models_list_);
                 if (need_delete_root) {
                     cJSON_Delete(root);
                 }

@@ -7,7 +7,7 @@
 #include "assets/lang_c.h"
 #include "device_state.h"
 #include "display/display.h"
-#include "audio/audio_codec.h"
+#include "audio_codec.h"
 
 #include <stdlib.h>
 #include <stdio.h>

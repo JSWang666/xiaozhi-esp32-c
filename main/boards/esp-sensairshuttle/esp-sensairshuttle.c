@@ -20,7 +20,7 @@
 #include <freertos/task.h>
 
 #include "esp_lcd_ili9341.h"
-#include "audio/audio_codec.h"
+#include "audio_codec.h"
 #include "c_api/board_c_api.h"
 
 #define TAG "ESP_SensairShuttle"

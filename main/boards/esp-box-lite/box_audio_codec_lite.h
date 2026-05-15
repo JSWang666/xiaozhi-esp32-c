@@ -1,7 +1,7 @@
 #ifndef _BOX_AUDIO_CODEC_LITE_H
 #define _BOX_AUDIO_CODEC_LITE_H
 
-#include "audio_codec.h"
+#include "audio_codec_cxx.h"
 
 #include <esp_codec_dev.h>
 #include <esp_codec_dev_defaults.h>

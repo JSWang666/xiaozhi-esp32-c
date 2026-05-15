@@ -5,7 +5,7 @@
 #include <esp_codec_dev_defaults.h>
 #include <esp_log.h>
 
-#include "audio/audio_codec.h"
+#include "audio_codec_cxx.h"
 
 class AIVOX3AudioCodec : public AudioCodec {
 private:

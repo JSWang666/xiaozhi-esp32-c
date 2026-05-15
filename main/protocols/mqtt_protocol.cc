@@ -7,6 +7,7 @@
 #include <cstring>
 #include <arpa/inet.h>
 #include "assets/lang_config.h"
+#include "audio_c_api.h"
 
 #define TAG "MQTT"
 
