@@ -841,10 +841,9 @@ esp_err_t audio_service_init(audio_service_t *svc, void *audio_codec_handle)
         return ESP_ERR_INVALID_ARG;
     }
     s->codec = codec;
-    if (codec->ops && codec->ops->start) {
+    audio_codec_base_start(codec);
+    if (codec->ops && codec->ops->start && codec->ops->start != audio_codec_base_start) {
         codec->ops->start(codec);
-    } else {
-        audio_codec_base_start(codec);
     }
 
     esp_opus_dec_cfg_t opus_dec_cfg = OPUS_DEC_CFG(codec->output_sample_rate, OPUS_FRAME_DURATION_MS);

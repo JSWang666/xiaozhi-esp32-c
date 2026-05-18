@@ -12,7 +12,7 @@
 #include "application.h"
 
 #include "led/led.h"
-#include "audio/codecs/no_audio_codec.h"
+#include "audio_codec_cxx.h"
 #include "display/display.h"
 #include "backlight.h"
 #include "camera.h"
@@ -50,14 +50,36 @@ public:
     }
 };
 
-/* Wraps a raw audio_codec_t* via NoAudioCodec (which already forwards
- * Read/Write/EnableInput/EnableOutput to ops). We add the missing
- * SetOutputVolume / SetInputGain / Start overrides so that boards with a
- * pure-C codec (sensecap / m5stack / df-k10 / lilygo ADC-PDM / etc.) get
- * volume / gain / start actually applied to the hardware. */
-class CAudioCodecAdapter : public NoAudioCodec {
+/* Wraps a raw audio_codec_t* into the C++ Board API while keeping the codec
+ * implementation itself fully C. */
+class CAudioCodecAdapter : public AudioCodec {
 public:
-    explicit CAudioCodecAdapter(audio_codec_t *c) : NoAudioCodec(c) {}
+    explicit CAudioCodecAdapter(audio_codec_t *c) : AudioCodec() {
+        c_codec_ = c;
+        if (c_codec_) {
+            tx_handle_ = c_codec_->tx_handle;
+            rx_handle_ = c_codec_->rx_handle;
+            duplex_ = c_codec_->duplex;
+            input_reference_ = c_codec_->input_reference;
+            input_enabled_ = c_codec_->input_enabled;
+            output_enabled_ = c_codec_->output_enabled;
+            input_sample_rate_ = c_codec_->input_sample_rate;
+            output_sample_rate_ = c_codec_->output_sample_rate;
+            input_channels_ = c_codec_->input_channels;
+            output_channels_ = c_codec_->output_channels;
+            output_volume_ = c_codec_->output_volume;
+            input_gain_ = c_codec_->input_gain;
+        }
+    }
+
+    ~CAudioCodecAdapter() override {
+        if (c_codec_) {
+            audio_codec_destroy(c_codec_);
+            c_codec_ = nullptr;
+            tx_handle_ = nullptr;
+            rx_handle_ = nullptr;
+        }
+    }
 
     void Start() override {
         AudioCodec::Start();   /* load output_volume_ from settings */
@@ -96,6 +118,39 @@ public:
             return;
         }
         AudioCodec::SetInputGain(gain);
+    }
+
+    void EnableInput(bool enable) override {
+        if (c_codec_ && c_codec_->ops && c_codec_->ops->enable_input) {
+            c_codec_->ops->enable_input(c_codec_, enable);
+            input_enabled_ = c_codec_->input_enabled;
+            return;
+        }
+        AudioCodec::EnableInput(enable);
+    }
+
+    void EnableOutput(bool enable) override {
+        if (c_codec_ && c_codec_->ops && c_codec_->ops->enable_output) {
+            c_codec_->ops->enable_output(c_codec_, enable);
+            output_enabled_ = c_codec_->output_enabled;
+            return;
+        }
+        AudioCodec::EnableOutput(enable);
+    }
+
+protected:
+    int Write(const int16_t *data, int samples) override {
+        if (c_codec_ && c_codec_->ops && c_codec_->ops->write) {
+            return c_codec_->ops->write(c_codec_, data, samples);
+        }
+        return 0;
+    }
+
+    int Read(int16_t *dest, int samples) override {
+        if (c_codec_ && c_codec_->ops && c_codec_->ops->read) {
+            return c_codec_->ops->read(c_codec_, dest, samples);
+        }
+        return 0;
     }
 };
 

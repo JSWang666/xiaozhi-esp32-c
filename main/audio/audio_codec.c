@@ -37,9 +37,6 @@ void audio_codec_base_start(audio_codec_t *codec)
         settings_close(s);
     }
 
-    if (codec->ops && codec->ops->start)
-        codec->ops->start(codec);
-
     ESP_LOGI(TAG, "Audio codec started");
 }
 
