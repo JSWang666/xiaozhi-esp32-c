@@ -17,6 +17,7 @@
 #include "c_api/mcp_server_c_api.h"
 #include "device_state.h"
 #include "sscma_client_commands.h"
+#include "boards/sensecap-watcher/sscma_camera_api.h"
 
 #define TAG "SscmaCamera"
 
@@ -359,4 +360,69 @@ void sscma_camera_destroy(sscma_camera_t *self)
     if (self->client_handle) sscma_client_del(self->client_handle);
     if (self->data_queue) vQueueDelete(self->data_queue);
     free(self);
+}
+
+esp_err_t sscma_camera_capture_still(sscma_camera_t *self, int timeout_ms)
+{
+    if (!self || !self->client_handle || !self->data_queue || !self->jpeg_data.buf) {
+        return ESP_ERR_INVALID_STATE;
+    }
+
+    sscma_data_t dummy;
+    while (xQueueReceive(self->data_queue, &dummy, 0) == pdPASS) {
+        if (dummy.img) {
+            heap_caps_free(dummy.img);
+        }
+    }
+
+    self->jpeg_data.len = 0;
+
+    (void)sscma_client_break(self->client_handle);
+    vTaskDelay(pdMS_TO_TICKS(80));
+
+    if (sscma_client_set_model(self->client_handle, 4) != ESP_OK) {
+        ESP_LOGW(TAG, "capture_still: set_model failed");
+    }
+    if (sscma_client_set_sensor(self->client_handle, 1, 3, true) != ESP_OK) {
+        ESP_LOGW(TAG, "capture_still: set_sensor failed");
+    }
+
+    if (sscma_client_invoke(self->client_handle, 1, false, true) != ESP_OK) {
+        ESP_LOGW(TAG, "capture_still: invoke failed");
+    }
+
+    sscma_data_t sdata = {0};
+    TickType_t wait = (timeout_ms <= 0) ? pdMS_TO_TICKS(8000) : pdMS_TO_TICKS(timeout_ms);
+    if (xQueueReceive(self->data_queue, &sdata, wait) != pdPASS) {
+        (void)sscma_client_break(self->client_handle);
+        return ESP_ERR_TIMEOUT;
+    }
+
+    if (!sdata.img || sdata.len == 0) {
+        if (sdata.img) {
+            heap_caps_free(sdata.img);
+        }
+        (void)sscma_client_break(self->client_handle);
+        return ESP_FAIL;
+    }
+
+    size_t copy_len = sdata.len < IMG_JPEG_BUF_SIZE ? sdata.len : IMG_JPEG_BUF_SIZE;
+    memcpy(self->jpeg_data.buf, sdata.img, copy_len);
+    self->jpeg_data.len = copy_len;
+    heap_caps_free(sdata.img);
+
+    (void)sscma_client_break(self->client_handle);
+    return ESP_OK;
+}
+
+const uint8_t *sscma_camera_last_jpeg(const sscma_camera_t *self, size_t *out_len)
+{
+    if (!self || !out_len) {
+        return NULL;
+    }
+    *out_len = self->jpeg_data.len;
+    if (self->jpeg_data.len == 0 || !self->jpeg_data.buf) {
+        return NULL;
+    }
+    return self->jpeg_data.buf;
 }

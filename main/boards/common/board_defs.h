@@ -10,6 +10,12 @@ extern "C" {
 
 typedef struct board_desc board_desc_t;
 
+/** How to wrap `get_camera()` into the C++ `Camera` API (MCP, etc.). */
+typedef enum {
+    BOARD_CAMERA_KIND_DEFAULT = 0,
+    BOARD_CAMERA_KIND_SSCMA, /*!< `get_camera` returns `sscma_camera_t*` */
+} board_camera_kind_t;
+
 typedef enum {
     BOARD_KIND_WIFI = 0,
     BOARD_KIND_ML307,
@@ -28,6 +34,7 @@ struct board_desc {
     void *(*get_display)(board_desc_t *self);
     void *(*get_backlight)(board_desc_t *self);
     void *(*get_camera)(board_desc_t *self);
+    board_camera_kind_t camera_kind;
 
     bool (*get_battery_level)(board_desc_t *self, int *level,
                               bool *charging, bool *discharging);

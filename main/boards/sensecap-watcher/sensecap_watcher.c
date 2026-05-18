@@ -574,6 +574,7 @@ board_desc_t *create_board_desc(void)
     ctx->base.get_display = get_display;
     ctx->base.get_backlight = get_backlight;
     ctx->base.get_camera = get_camera;
+    ctx->base.camera_kind = BOARD_CAMERA_KIND_SSCMA;
     ctx->base.get_battery_level = get_battery_level;
     ctx->base.destroy = destroy;
 
